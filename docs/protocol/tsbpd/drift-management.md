@@ -1,0 +1,12 @@
+# Drift Management
+
+When the sender enters “connected” state it tells the application there is a socket interface that is transmitter-ready. At this point the application can start sending data packets. It adds packets to the SRT sender‘s buffer at a certain input rate, from which they are transmitted to the receiver at scheduled times. 
+
+A synchronized time is required to keep proper sender/receiver buffer levels, taking into account the time zone and round-trip time \(up to 2 seconds for satellite links\). Considering addition/subtraction round-­off, and possibly unsynchronized system times, an agreed-­upon time base drifts by a few microseconds every minute. The drift may accumulate over many days to a point where the sender or receiver buffers will overflow or deplete, seriously affecting the quality of the video. SRT has a time management mechanism to compensate for this drift.
+
+When a packet is received, SRT determines the difference between the time it was expected and its timestamp. The timestamp is calculated on the receiver side. The RTT tells the receiver how much time it was supposed to take. SRT maintains a reference between the time at the leading edge of the send buffer‘s latency window and the corresponding time on the receiver \(the present time\). This allows conversion to real time to be able to schedule events, based on a local time reference.
+
+The receiver samples time drift data and periodically calculates a packet timestamp correction factor, which is applied to each data packet received by adjusting the inter-packet interval. When a packet is received it isn‘t given right away to the application. As time advances, the receiver knows the expected time for any missing or dropped packet, and can use this information to fill any “holes” in the receive queue with another packet.
+
+The receiver uses local time to be able to schedule events — to determine, for example, if it‘s time to deliver a certain packet right away. The timestamps in the packets themselves are just references to the beginning of the session. When a packet is received \(with a timestamp from the sender\), the receiver makes a reference to the beginning of the session to recalculate its timestamp. The start time is derived from the local time at the moment that the session is connected. A packet timestamp equals “now” minus “StartTime”, where the latter is the point in time when the socket was created.
+

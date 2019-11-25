@@ -1,0 +1,12 @@
+site_name: SRT Cookbook
+
+theme:
+  name: 'material'
+  language: 'en'
+  
+extra:
+  search:
+    language: 'en'
+    
+markdown_extensions:
+  - admonition
