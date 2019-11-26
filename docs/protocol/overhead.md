@@ -11,6 +11,16 @@
 <!--Plugin JavaScript file-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
 
+<!--script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.esm.js"></script-->
+<!--script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.js"></script-->
+
+<style>
+    :root {
+      --ion-safe-area-top: 20px;
+      --ion-safe-area-bottom: 22px;
+    }
+</style>
+
 <canvas id="stacked-area-chart" width="800" height="400"></canvas>
 
 <script type="text/javascript">
@@ -62,11 +72,11 @@ function createDataSet(beginMbps, endMbps, stepMbps, lossRatio = 0) {
     //const {dataHdrBits, ackBits, ackackBits, nakBits, resendBits} = calcOverhead(Mbps, 0, 0);
     const {dataHdrBytes, ackBytes, ackackBytes, nakBytes, resendBytes} = calcOverhead(Mbps, lossRatio, 0);
     bitrates.push(Mbps);
-    dataHeaderBits.push((8 * dataHdrBytes) / (Mbps * 10000));
-    ackBits.push((8 * ackBytes) / (Mbps * 10000));
-    ackackBits.push((8 * ackackBytes) / (Mbps * 10000));
-    nakBits.push((8 * nakBytes) / (Mbps * 10000));
-    resendBits.push((8 * resendBytes) / (Mbps * 10000));
+    dataHeaderBits.push(((8 * dataHdrBytes) / (Mbps * 10000)).toFixed(3));
+    ackBits.push(((8 * ackBytes) / (Mbps * 10000)).toFixed(3));
+    ackackBits.push(((8 * ackackBytes) / (Mbps * 10000)).toFixed(3));
+    nakBits.push(((8 * nakBytes) / (Mbps * 10000)).toFixed(3));
+    resendBits.push(((8 * resendBytes) / (Mbps * 10000)).toFixed(3));
   }
   //console.log(ackackBits)
   return {
@@ -100,8 +110,8 @@ const colors = {
 };
 
 function onLossRatioChanged(value) {
-  console.log("New value " + value);
-  dataSet = createDataSet(1, 30, 5, value / 100);
+  //console.log("New value " + value);
+  dataSet = createDataSet(1, 30, 1, value / 100);
   myChart.data.datasets[0].data = dataSet.dataHeaderBits;
   myChart.data.datasets[1].data = dataSet.ackBits;
   myChart.data.datasets[2].data = dataSet.ackackBits;
@@ -112,7 +122,7 @@ function onLossRatioChanged(value) {
 }
 
 const dataPackets = Array.from(new Array(5), (val, i)=> calcOverhead(1+ i * 5, 0, 0) );
-var   dataSet = createDataSet(1, 30, 5);
+var   dataSet = createDataSet(1, 30, 1);
 const availableForExisting = [16, 13, 25, 33, 40, 33, 45];
 const unavailable = [5, 9, 10, 9, 18, 19, 20];
 
@@ -172,13 +182,13 @@ var myChart = new Chart(ctx, {
     scales: {
       yAxes: [{
         stacked: true,
-		scaleLabel: {
+        scaleLabel: {
           display: true,
           labelString: 'Overhead, %'
       }
       }],
-	  xAxes: [{
-		scaleLabel: {
+      xAxes: [{
+        scaleLabel: {
           display: true,
           labelString: 'Bitrate, Mbps'
       }
@@ -194,14 +204,16 @@ var myChart = new Chart(ctx, {
 
 <!--input type="range" min="0" max="10" step="1" oninput="onLossRatioChanged(this.value)"--> <!--onchange="onLossRatioChanged(this.value)"-->
 
+<!--ion-toggle slot="start" value="Mbps" name="Mbps" checked></ion-toggle-->
+
 <p>
 <h3>Loss ratio:</h3>
-</p>
+
 <input type="text" class="js-range-slider" name="loss_ratio" value="0"  oninput="onLossRatioChanged(this.value)"/>
 
 <p>
 <h3>Latency (xRTT):</h3>
-</p>
+
 TODO
     
 <script type="text/javascript">
