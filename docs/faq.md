@@ -10,7 +10,7 @@ Corporate: Haivision Media Gateway, Haivision KB, Haivision Makito X
 
 Messages about TSBPD wrap period are informational. These are not errors. SRT just informs that the timer used to track packets is close to overflow and is ready to be reset. There is nothing you should do about that. It is just to inform about this situation.
 
-For more information please see the [TSBPD Wrapping Period](protocol/tsbpd/drifttracer.md#tsbpd-wrapping-period) section.
+For more information please see the [TSBPD Wrapping Period](protocol/tsbpd/latency.md#tsbpd-wrapping-period) section.
 
 Issues on GitHub: [\#642](https://github.com/Haivision/srt/issues/642#issuecomment-539099521).
 
