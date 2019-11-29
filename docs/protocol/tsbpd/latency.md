@@ -2,7 +2,7 @@
 
 SRT has an end-to-end latency between the time a packet is given to SRT (`srt_sendmsg(...)`) and the time this very packet is received from SRT (`srt_recvmsg(...)`).
 
-The timing diagram issulstrates those key latency points with TSBPD enabled (live mode).
+The timing diagram illustrates those key latency points with TSBPD enabled (live mode).
 
 ![](tsbpd-latency.png)
 
