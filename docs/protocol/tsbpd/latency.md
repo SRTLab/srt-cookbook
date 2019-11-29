@@ -6,10 +6,9 @@ The timing diagram issulstrates those key latency points with TSBPD enabled (liv
 
 ![](tsbpd-latency.png)
 
-**!!! warning "Latency confustion"**
+!!! Note "End-to-end latency"
 
-The docs on `SRTO_RCVLATENCY` say it sets "the time that should elapse since the moment when the packet was sent and the moment when it is delivered to the receiver application in the receiving function."
-But the actual latency on the link will roughly be `SRTO_RCVLATENCY + RTT/2` 
+    The actual latency on the link will roughly be SRTO_RCVLATENCY + 1/2 × RTT<sub>0</sub>, where RTT<sub>0</sub> is the RTT value during the handshake.
 
 ## Packet Delivery Time
 
