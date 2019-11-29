@@ -1,6 +1,19 @@
-# Drift Tracer
+# SRT Latency
+
+SRT has an end-to-end latency between the time a packet is given to SRT (`srt_sendmsg(...)`) and the time this very packet is received from SRT (`srt_recvmsg(...)`).
+
+The timing diagram issulstrates those key latency points with TSBPD enabled (live mode).
+
+![](tsbpd-latency.png)
+
+**!!! warning "Latency confustion"**
+
+The docs on `SRTO_RCVLATENCY` say it sets "the time that should elapse since the moment when the packet was sent and the moment when it is delivered to the receiver application in the receiving function."
+But the actual latency on the link will roughly be `SRTO_RCVLATENCY + RTT/2` 
 
 ## Packet Delivery Time
+
+Packet delivery time is the time point, estimated by the receiver, when a packet should be given (delivered) to the upstream application (via `srt_recvmsg(...)`). It consists of the `TsbPdTimeBase` - the base time 
 
 `PktTsbPdTime = TsbPdTimeBase + TsbPdDelay + PKT_TIMESTAMP + Drift`
 
@@ -103,6 +116,3 @@ public:
     int64_t overdrift() const;
 };
 ```
-
-
-
