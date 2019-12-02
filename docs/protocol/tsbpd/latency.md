@@ -1,6 +1,6 @@
 # SRT Latency
 
-SRT has an end-to-end latency between the time a packet is given to SRT (`srt_sendmsg(...)`) and the time this very packet is received from SRT (`srt_recvmsg(...)`).
+SRT has an end-to-end latency between the time a packet is given to SRT with `srt_sendmsg(...)` and the time this very packet is received from SRT via `srt_recvmsg(...)`.
 
 The timing diagram illustrates those key latency points with TSBPD enabled (live mode).
 
@@ -12,7 +12,9 @@ The timing diagram illustrates those key latency points with TSBPD enabled (live
 
 ## Packet Delivery Time
 
-Packet delivery time is the time point, estimated by the receiver, when a packet should be given (delivered) to the upstream application (via `srt_recvmsg(...)`). It consists of the `TsbPdTimeBase` - the base time 
+Packet delivery time is the time point, estimated by the receiver, when a packet should be given (delivered) to the upstream application (via `srt_recvmsg(...)`).
+It consists of the `TsbPdTimeBase` - the base time difference between sender's and receiver's clock, receiver's buffer delay `TsbPdDelay`, a timestamp of a data packet `PKT_TIMESTAMP`,
+and a time drift `Drift`.
 
 `PktTsbPdTime = TsbPdTimeBase + TsbPdDelay + PKT_TIMESTAMP + Drift`
 
@@ -51,6 +53,11 @@ Therefore, the above equation can be considered as
 `DRIFT = T_NOW - (T_NOW - T_SENDER + T_SENDER) -> 0` if the link latency remains constant.
 
 Assuming that the link latency is constant \(RTT=const\), the only cause of the drift fluctuations should be clock inaccuracy.
+
+!!! Error "Drift Tracer should consider RTT"
+
+    Time drift sample does not take RTT fluctuations into account.
+    Instead an increase of RTT will be treated as a time drift. See [issue 753](https://github.com/Haivision/srt/issues/753).
 
 ## Drift Tracing and Adjustment
 
@@ -97,7 +104,10 @@ bool update(int64_t driftval)
 }
 ```
 
-**TODO:** Use RTTVar.
+!!! TODO "Consider RTTVar before changin the Drift value"
+
+    **RTTVar** expresses the variation of RTT values over time. Those variations should be considered when Drift is updated.
+	
 
 ## Class DriftTracer
 
