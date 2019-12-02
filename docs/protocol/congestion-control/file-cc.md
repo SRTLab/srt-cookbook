@@ -20,6 +20,10 @@ int m_iRCInterval;          // SRT Rate control interval
 
 ### Upon ACK Received
 
+!!! Note "Only Full ACK triggers"
+
+    Lite ACK do not trigger this case!
+
 ACK are processed not more often than every 10 milliseconds (`CUDT::COMM_SYN_INTERVAL_US`).
 
 `CWND_SIZE` is increased to the difference between the acknowledged sequence number since last ACK processing, and the sequence number being acknowledged:  `CWND_SIZE += LAST_ACK_SEQNO - ACK_SEQNO`.
