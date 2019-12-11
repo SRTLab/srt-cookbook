@@ -2,7 +2,7 @@
 
 ## What applications support SRT?
 
-Open source: srt-live-transmit, FFmpeg, WireShark, GStreamer
+Open source: srt-live-transmit, FFmpeg, WireShark, GStreamer, liquidsoap
 
 Corporate: Haivision Media Gateway, Haivision KB, Haivision Makito X
 
