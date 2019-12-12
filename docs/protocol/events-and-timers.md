@@ -101,7 +101,7 @@ Check statistics handling any packets after receiver ACK as belated, regardless 
 
 An offset between sequence numbers of the arrived packet and the previously received packet is calculated. If the packet is not the next packet in order, then a loss detection mechanism is triggered.
 
-First, a gap in sequence numbers of the consecutively received packets might be due to packet reordering. Sequence numbers that should fill the gap are added to the ***RcvLossList\*** of a socket.
+First, a gap in sequence numbers of the consecutively received packets might be due to packet reordering. Sequence numbers that should fill the gap are added to the ***RcvLossList*** of a socket.
 
 Then there is a decision whether a loss report should be sent. A non-zero reorder tolerance (ReorderTolerance <= MaxReorderTolerance) determines if a gap in sequence numbers is allowed. The default value of MaxReorderTolerance is zero, and it can be set with SRTO_LOSSMAXTTL socket option.
 
@@ -136,7 +136,7 @@ Example from *[SRT Periodic NAK Reports](http://haivision.jira.com/wiki/spaces/S
 
 By default periodic NAK reports are enabled in live mode (SRTO_TRANSTYPE = SRTT_LIVE), and disabled in file mode (SRTO_TRANSTYPE = SRTT_FILE). The functionality is controlled by SRTO_NAKREPORT socket option.
 
-***NAKtime*** is the time to send the next periodic NAK report. When ***t >= NAKtime*** and the ***RcvLossList\*** is not empty, a periodic NAK report is sent. This report includes all the packets in the receiver's loss list (***RcvLossList\***).
+***NAKtime*** is the time to send the next periodic NAK report. When ***t >= NAKtime*** and the ***RcvLossList*** is not empty, a periodic NAK report is sent. This report includes all the packets in the receiver's loss list (***RcvLossList***).
 
 ```
  |               Receive Buffer 
@@ -166,11 +166,12 @@ NAK interval ***NAKInt*** is updated after sending a loss report. The new value 
 
 The minimum value is NAKInt = max(NAKInt, NAKIntmin).
 
-NAKtime is a time to send the next periodic NAK report. The time is initialized at CUDT::open() and after a connection is established (PR [#745](https://github.com/Haivision/srt/pull/745)). NAKtime is updated with the last time a **periodic** NAK report was sent.
+NAKtime is a time to send the next periodic NAK report. The time is initialized at `CUDT::open()` and after a connection is established (PR [#745](https://github.com/Haivision/srt/pull/745)).
+NAKtime is updated with the last time a **periodic** NAK report was sent.
 
 - **ISSUE** [#701](https://github.com/Haivision/srt/issues/701). NAK time is updated after sending the periodic NAK report. Should be also updated after sending a regular LOSS report?
 
-When t >= NAKtime and the ***RcvLossList\*** is not empty, a periodic NAK report is sent. This report includes all the packets in the receiver's loss list (***RcvLossList\***).
+When t >= NAKtime and the ***RcvLossList*** is not empty, a periodic NAK report is sent. This report includes all the packets in the receiver's loss list (***RcvLossList***).
 
 ------
 
