@@ -1,0 +1,922 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+    
+    
+      
+        <title>SRT Protocol Overhead - SRT CookBook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#srt-protocol-overhead" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="SRT CookBook" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              SRT CookBook
+            </span>
+            <span class="md-header-nav__topic">
+              
+                SRT Protocol Overhead
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="SRT CookBook" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    SRT CookBook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../faq/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Apps
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Apps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../apps/" title="Applications with Support for SRT" class="md-nav__link">
+      Applications with Support for SRT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../apps/ffmpeg/" title="FFmpeg" class="md-nav__link">
+      FFmpeg
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../apps/gstreamer-plugin/" title="GStreamer" class="md-nav__link">
+      GStreamer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../apps/obs-studio/" title="OBS Studio" class="md-nav__link">
+      OBS Studio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../apps/vlc-media-player/" title="VLC Media Player" class="md-nav__link">
+      VLC Media Player
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../apps/wireshark/" title="Wireshark" class="md-nav__link">
+      Wireshark
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Getting started
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Getting started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/build-on-windows/" title="Build on Windows" class="md-nav__link">
+      Build on Windows
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/vcpkg-library-manager/" title="Vcpkg Library Manager" class="md-nav__link">
+      Vcpkg Library Manager
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      How to articles
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        How to articles
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../how-to-articles/how-to-setup-Azure-VM/" title="How to Setup Virtual Machine in Azure" class="md-nav__link">
+      How to Setup Virtual Machine in Azure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../how-to-articles/how-to-work-with-ssh-keys/" title="How to Work with SSH Keys" class="md-nav__link">
+      How to Work with SSH Keys
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      Protocol
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Protocol
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="The Protocol" class="md-nav__link">
+      The Protocol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bandwidth-estimation/" title="Bandwidth Estimation" class="md-nav__link">
+      Bandwidth Estimation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../events-and-timers/" title="Control Events and Timers" class="md-nav__link">
+      Control Events and Timers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="SRT Protocol Overhead" class="md-nav__link md-nav__link--active">
+      SRT Protocol Overhead
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../threads/" title="Threads" class="md-nav__link">
+      Threads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-6" type="checkbox" id="nav-6-6">
+    
+    <label class="md-nav__link" for="nav-6-6">
+      Congestion control
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-6">
+        Congestion control
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../congestion-control/" title="Congestion Control" class="md-nav__link">
+      Congestion Control
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../congestion-control/file-cc/" title="File Congestion Control" class="md-nav__link">
+      File Congestion Control
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-7" type="checkbox" id="nav-6-7">
+    
+    <label class="md-nav__link" for="nav-6-7">
+      Tsbpd
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-7">
+        Tsbpd
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tsbpd/" title="TSBPD" class="md-nav__link">
+      TSBPD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tsbpd/drift-management/" title="Drift Management" class="md-nav__link">
+      Drift Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tsbpd/latency/" title="SRT Latency" class="md-nav__link">
+      SRT Latency
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="srt-protocol-overhead">SRT Protocol Overhead</h1>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<!--Plugin CSS file with desired skin-->
+
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/></p>
+<!--jQuery-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!--Plugin JavaScript file-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+
+<!--script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.esm.js"></script-->
+
+<!--script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.js"></script-->
+
+<style>
+    :root {
+      --ion-safe-area-top: 20px;
+      --ion-safe-area-bottom: 22px;
+    }
+</style>
+
+<canvas id="stacked-area-chart" width="800" height="400"></canvas>
+
+<script type="text/javascript">
+
+function calcOverhead(Mbps, loss_ratio, latency_xrtt) {
+  const bps = Mbps * 1000000;
+  const MAX_PLD = 1316;
+  const DATA_HDR_BYTES = 24;
+  const ACK_BYTES = 44;
+  const ACKACK_BYTES = 16;
+  const NAK_BYTES = 16 + 4;
+
+  const data_pkts      = Math.ceil(bps / (8 * MAX_PLD));
+  const data_hdr_bytes = data_pkts * DATA_HDR_BYTES;
+
+  const ack_pkts       = 1000 / 10;   // Every 10 ms
+  const ack_bytes      = ack_pkts * ACK_BYTES;
+  const ackack_bytes   = ack_pkts * ACKACK_BYTES;
+
+  const lost_pkts      = Math.ceil(data_pkts * loss_ratio);
+  const nak_bytes      = lost_pkts * NAK_BYTES;
+
+  // TODO: latency of 1RTT
+  const resend_bytes   = lost_pkts * (MAX_PLD + DATA_HDR_BYTES)
+  //console.log("Bitrate " + Mbps + " num pkts " + data_pkts + " lost pkts " + lost_pkts + " resend " + resend_bytes);
+
+  return {
+    dataHdrBytes: data_hdr_bytes,
+    ackBytes: ack_bytes,
+    ackackBytes: ackack_bytes,
+    nakBytes: nak_bytes,
+    resendBytes: resend_bytes
+  };
+}
+
+function createDataSet(beginMbps, endMbps, stepMbps, lossRatio = 0) {
+  let bitrates = [];
+  let dataHeaderBits = [];
+  let ackBits = [];
+  let ackackBits = [];
+  let nakBits = [];
+  let resendBits = [];
+
+  // _.range([start], stop, [step])
+  // _.range(10); // => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  for (let Mbps = beginMbps; Mbps < endMbps; Mbps += stepMbps) {
+    //console.log(Mbps);
+    //const {dataHdrBits, ackBits, ackackBits, nakBits, resendBits} = calcOverhead(Mbps, 0, 0);
+    const {dataHdrBytes, ackBytes, ackackBytes, nakBytes, resendBytes} = calcOverhead(Mbps, lossRatio, 0);
+    bitrates.push(Mbps);
+    dataHeaderBits.push(((8 * dataHdrBytes) / (Mbps * 10000)).toFixed(3));
+    ackBits.push(((8 * ackBytes) / (Mbps * 10000)).toFixed(3));
+    ackackBits.push(((8 * ackackBytes) / (Mbps * 10000)).toFixed(3));
+    nakBits.push(((8 * nakBytes) / (Mbps * 10000)).toFixed(3));
+    resendBits.push(((8 * resendBytes) / (Mbps * 10000)).toFixed(3));
+  }
+  //console.log(ackackBits)
+  return {
+    bitratesMbps: bitrates,
+    dataHeaderBits: dataHeaderBits,
+    ackBits: ackBits,
+    ackackBits: ackackBits,
+    nakBits: nakBits,
+    resendBits: resendBits
+  };
+}
+
+var ctx = document.getElementById("stacked-area-chart").getContext("2d");
+
+const colors = {
+  green: {
+    fill: '#e0eadf',
+    stroke: '#5eb84d',
+  },
+  lightBlue: {
+    stroke: '#6fccdd',
+  },
+  darkBlue: {
+    fill: '#92bed2',
+    stroke: '#3282bf',
+  },
+  purple: {
+    fill: '#8fa8c8',
+    stroke: '#75539e',
+  },
+};
+
+function onLossRatioChanged(value) {
+  //console.log("New value " + value);
+  dataSet = createDataSet(1, 30, 1, value / 100);
+  myChart.data.datasets[0].data = dataSet.dataHeaderBits;
+  myChart.data.datasets[1].data = dataSet.ackBits;
+  myChart.data.datasets[2].data = dataSet.ackackBits;
+  myChart.data.datasets[3].data = dataSet.nakBits;
+  myChart.data.datasets[4].data = dataSet.resendBits;
+  //console.log(myChart.data.datasets);
+  myChart.update();
+}
+
+const dataPackets = Array.from(new Array(5), (val, i)=> calcOverhead(1+ i * 5, 0, 0) );
+var   dataSet = createDataSet(1, 30, 1);
+const availableForExisting = [16, 13, 25, 33, 40, 33, 45];
+const unavailable = [5, 9, 10, 9, 18, 19, 20];
+
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: dataSet.bitratesMbps,
+    datasets: [{
+      label: "DATA Header Bits",
+      fill: true,
+      backgroundColor: colors.purple.fill,
+      pointBackgroundColor: colors.purple.stroke,
+      borderColor: colors.purple.stroke,
+      pointHighlightStroke: colors.purple.stroke,
+      borderCapStyle: 'butt',
+      data: dataSet.dataHeaderBits,
+    }, {
+      label: "ACK Bits",
+      fill: true,
+      backgroundColor: colors.darkBlue.fill,
+      pointBackgroundColor: colors.darkBlue.stroke,
+      borderColor: colors.darkBlue.stroke,
+      pointHighlightStroke: colors.darkBlue.stroke,
+      borderCapStyle: 'butt',
+      data: dataSet.ackBits,
+    }, {
+      label: "ACKACK Bits",
+      fill: true,
+      backgroundColor: colors.green.fill,
+      pointBackgroundColor: colors.lightBlue.stroke,
+      borderColor: colors.lightBlue.stroke,
+      pointHighlightStroke: colors.lightBlue.stroke,
+      borderCapStyle: 'butt',
+      data: dataSet.ackackBits,
+     }, {
+       label: "NAK Bits",
+       fill: true,
+       backgroundColor: colors.green.fill,
+       pointBackgroundColor: colors.green.stroke,
+       borderColor: colors.green.stroke,
+       pointHighlightStroke: colors.green.stroke,
+       data: dataSet.nakBits,
+    }, {
+       label: "Resend Bits",
+       fill: true,
+       backgroundColor: colors.green.fill,
+       pointBackgroundColor: colors.green.stroke,
+       borderColor: colors.green.stroke,
+       pointHighlightStroke: colors.green.stroke,
+       data: dataSet.resendBits,
+    }]
+  },
+  options: {
+    showAllTooltips: true,
+    responsive: false,
+    // Can't just just `stacked: true` like the docs say
+    scales: {
+      yAxes: [{
+        stacked: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'Overhead, %'
+      }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: 'Bitrate, Mbps'
+      }
+      }]
+    },
+    animation: {
+      duration: 750,
+    },
+  }
+});
+
+</script>
+
+<!--input type="range" min="0" max="10" step="1" oninput="onLossRatioChanged(this.value)"-->
+
+<!--onchange="onLossRatioChanged(this.value)"-->
+
+<!--ion-toggle slot="start" value="Mbps" name="Mbps" checked></ion-toggle-->
+
+<p>
+<h3>Loss ratio:</h3>
+
+<input type="text" class="js-range-slider" name="loss_ratio" value="0"  oninput="onLossRatioChanged(this.value)"/>
+
+<p>
+<h3>Latency (xRTT):</h3>
+
+TODO
+
+<script type="text/javascript">
+$(".js-range-slider").ionRangeSlider({
+        skin: "round",
+        grid: true,
+        min: 0,
+        max: 10,
+        step: 1,
+        from: 0,
+        postfix: " %"
+    });
+</script>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../events-and-timers/" title="Control Events and Timers" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Control Events and Timers
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../threads/" title="Threads" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Threads
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
