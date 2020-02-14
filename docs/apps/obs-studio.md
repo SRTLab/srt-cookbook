@@ -1,6 +1,9 @@
-# OBS Studio
+# About OBS Studio
 
-[OBS Studio](https://obsproject.com/) is a free and open source software for video recording and live streaming.
+Free and open source software for video recording and live streaming.
 
-Starting from version 24.0.7?? It supports SRT (PR [1748](https://github.com/obsproject/obs-studio/pull/1748)).
+Please visit [OBS Studio website](https://obsproject.com/) for more details.
 
+# SRT Support
+
+SRT support is expected to be available within 24.0.6 version. See [PR #1748](https://github.com/obsproject/obs-studio/pull/1748) for details.

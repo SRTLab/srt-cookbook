@@ -13,7 +13,7 @@ SRT is used by thousands of organizations globally in a wide range of industry a
 * Wireshark [[Website]](https://www.wireshark.org/)
 * FFmpeg [[Website]](https://www.ffmpeg.org/)
 * Libav [[Website]](https://libav.org/)
-* OBS Studio [[Website]](https://obsproject.com/)
+* OBS Studio [[Website]](https://obsproject.com/) [[GitHub]](https://github.com/obsproject/obs-studio)
 * TSDuck [[Website]](https://tsduck.io/) [[GitHub]](https://github.com/tsduck/tsduck)
 * Eyevinn Toolbox [[GitHub]](https://github.com/Eyevinn/toolbox)
 * liquidsoap [[Website]](https://www.liquidsoap.info/) [[GitHub]](https://github.com/savonet/liquidsoap)
