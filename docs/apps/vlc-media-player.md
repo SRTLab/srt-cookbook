@@ -15,5 +15,4 @@ SRT options can be specified on the corresponding property page. Go to the menu 
 
 Select "SRT" in the tree node of "Input Codecs" -&gt; "Access modules".
 
-![](./vlc-srt-props.png)
-
+![](img/vlc-srt-props.png)
