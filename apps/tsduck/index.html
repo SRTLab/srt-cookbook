@@ -36,7 +36,7 @@
     
     
       
-        <title>GStreamer - SRT CookBook</title>
+        <title>About TSDuck - SRT CookBook</title>
       
     
     
@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#gstreamer" tabindex="1" class="md-skip">
+      <a href="#about-tsduck" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -101,7 +101,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                GStreamer
+                About TSDuck
               
             </span>
           
@@ -237,103 +237,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        GStreamer
-      </label>
-    
-    <a href="./" title="GStreamer" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../gstreamer-plugin/" title="GStreamer" class="md-nav__link">
       GStreamer
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#using-gstreamer-and-srt-to-set-up-a-screensharing" class="md-nav__link">
-    Using GStreamer and SRT to set up a screensharing
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sender-server" class="md-nav__link">
-    Sender server
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-screensharing-40linux-with-x-display41" class="md-nav__link">
-    For screensharing (Linux with X Display)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-webcam-images" class="md-nav__link">
-    For webcam images
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    Notes
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#receiver-client" class="md-nav__link">
-    Receiver client
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#useful-links" class="md-nav__link">
-    Useful Links
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -353,11 +261,20 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../tsduck/" title="About TSDuck" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="About TSDuck" class="md-nav__link md-nav__link--active">
       About TSDuck
     </a>
+    
   </li>
 
         
@@ -707,76 +624,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#using-gstreamer-and-srt-to-set-up-a-screensharing" class="md-nav__link">
-    Using GStreamer and SRT to set up a screensharing
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sender-server" class="md-nav__link">
-    Sender server
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-screensharing-40linux-with-x-display41" class="md-nav__link">
-    For screensharing (Linux with X Display)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-webcam-images" class="md-nav__link">
-    For webcam images
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    Notes
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#receiver-client" class="md-nav__link">
-    Receiver client
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#useful-links" class="md-nav__link">
-    Useful Links
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -788,55 +635,193 @@
               
                 
                 
-                <h1 id="gstreamer">GStreamer</h1>
-<p>Starting from ver. 1.14 GStreamer supports SRT (see the <a href="https://gstreamer.freedesktop.org/releases/1.14/">v.1.14 release notes</a>). See the SRT plugin for GStreamer on <a href="https://gitlab.freedesktop.org/gstreamer/gst-plugins-bad/tree/master/ext/srt">git</a>.</p>
-<h2 id="using-gstreamer-and-srt-to-set-up-a-screensharing">Using GStreamer and SRT to set up a screensharing</h2>
-<p>Based on the description in <a href="https://github.com/Haivision/srt/issues/7">#7</a>. Note that the commands are likely to change slightly for gstreamer 1.16 (see this <a href="https://gitlab.freedesktop.org/gstreamer/gst-plugins-bad/issues/874#note_106395">issue</a>).</p>
-<p>If you don't want to build GSteamer, SRT, and all the plugins from source or don't have a distribution that has 1.14 readily available, you can use <a href="https://nixos.org/nix/"><code>nix</code></a> to reproduce what is shown further.</p>
-<p>Simply install <code>nix</code>; then use the command bellow to open a shell where the following commands work.</p>
-<pre><code class="text">NIX_PATH=nixpkgs=https://github.com/nh2/nixpkgs/archive/a94ff5f6aaa.tar.gz \
-nix-shell -p gst_all_1.gstreamer \
-          -p gst_all_1.gst-plugins-good -p gst_all_1.gst-plugins-base \
-          -p gst_all_1.gst-plugins-bad \
-          -p gst_all_1.gst-plugins-ugly -p gst_all_1.gst-libav
-</code></pre>
-
-<h3 id="sender-server">Sender server</h3>
-<p>Set up a sender server that will grab a source raw video from a desktop or a webcam, encode it with x.264 (H.264/AVC) encoder, pack it in <code>MPEG-TS</code> (<a href="https://github.com/maxlovic/srt-cookbook/tree/c3755b5293c31d2a952bc1624177a504ae99cf29/applications/live-streaming.md">more info about live streaming</a>). Then pipe it into the SRT sink that sends it over the network to the receiver client. The streaming URI should looks like <code>uri=srt://&lt;ip&gt;:&lt;port&gt;</code>. In the examples below the streaming is sent to port 888 on a localhost by specifying <code>uri=srt://0.0.0.0:8888</code>.</p>
-<h4 id="for-screensharing-40linux-with-x-display41">For screensharing (Linux with X Display)</h4>
-<p>The <code>ximagesrc</code> GStreamer plugin can be used to capture X Display and create raw RGB video. Refer to <code>ximagesrc</code> <a href="https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-ximagesrc.html">RM</a> for configuration options.</p>
-<pre><code class="text">/usr/bin/time gst-launch-1.0 ximagesrc startx=0 show-pointer=true use-damage=0 \
-! videoconvert \
-! x264enc bitrate=32000 tune=zerolatency speed-preset=veryfast \
-byte-stream=true threads=1 key-int-max=15 \
-intra-refresh=true ! video/x-h264, profile=baseline, framerate=30/1 ! mpegtsmux \
-! srtserversink uri=srt://0.0.0.0:8888/ latency=100
-</code></pre>
-
-<h4 id="for-webcam-images">For webcam images</h4>
-<p>The <code>v4l2src</code> GStreamer plugin can be used to capture video from v4l2 devices, like webcams and TV cards. Refer to <code>v4l2src</code> <a href="https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-v4l2src.html">RM</a> for further information.</p>
-<pre><code class="text">/usr/bin/time gst-launch-1.0 v4l2src ! videoconvert \
-! x264enc bitrate=8000 tune=zerolatency speed-preset=superfast \
-byte-stream=true threads=1 key-int-max=15 intra-refresh=true \
-! video/x-h264, profile=baseline ! mpegtsmux \
-! srtserversink uri=srt://0.0.0.0:8888/ latency=100
-</code></pre>
-
-<h4 id="notes">Notes</h4>
+                <h1 id="about-tsduck">About TSDuck</h1>
+<p>TSDuck is an extensible toolkit for MPEG/DVB transport streams. TSDuck is used in digital television systems for test, monitoring, integration, debug, lab, demo.</p>
+<p>In practice, TSDuck is used for:</p>
 <ul>
-<li>The <code>decodebin</code> can also be used to configure settings automatically. Using explicit pipeline elements here make it possible to tune the settings when needed.</li>
-<li>A use of <code>time</code> helps to determine when the thread is capped at 100%, while the the <code>thread=1</code> parameter makes the encoding use only one thread. Remove <code>threads=1</code> to allow multiple cores, or cjange the  <code>speed-preset</code> to reduce CPU load.</li>
-<li>The <code>timeout</code> setting can be tuned. A recommended timeout is 2x-2.5x of the expected roundtrip time.</li>
-<li>The password functionality works as well, but only if a password is <code>&gt;= 10</code> characters long; otherwise it's completely ignored. See <a href="https://gitlab.freedesktop.org/gstreamer/gst-plugins-bad/issues/694#note_106616">this bug</a> of GStreamer.</li>
+<li>Transport stream acquisition or transmodulation, including DVB, ATSC, ASI and IP multicast.</li>
+<li>Analyze transport streams, PSI/SI signalization, bitrates, timestamps.</li>
+<li>Monitor and report conditions on the stream (video and audio properties, bitrates, crypto-periods, signalization).</li>
+<li>On-the-fly transformation or injection of content and signalization.</li>
+<li>Modify, remove, rename, extract services.</li>
+<li>Work on live transport streams, DVB-S/C/T, ATSC, ASI, IP-TV, HTTP, HLS, SRT or offline transport stream files.</li>
+<li>Re-route transport streams to other applications.</li>
+<li>And more...</li>
 </ul>
-<h3 id="receiver-client">Receiver client</h3>
-<p>A client connection over SRT to the server with URI <code>srt://127.0.0.1:8888</code> (localhost) or a remote server is set up. URI syntax is <code>srt://&lt;ip&gt;:&lt;port&gt;</code>. Then MPEG-TS demuxer and video decoder is used to get a decompressed video, that goes to a playback plugin <code>autovideosink</code>. Note that multiple clients can connect to the server started earlier.</p>
-<p><code>gst-launch-1.0 srtclientsrc uri=srt://127.0.0.1:8888 ! tsdemux ! h264parse ! video/x-h264 ! avdec_h264 ! autovideosink sync=false</code></p>
-<p>This works over both the internet and localhost.</p>
-<h3 id="useful-links">Useful Links</h3>
+<p>For detailed information, guidelines and use cases, please visit <a href="https://tsduck.io/">TSDuck website</a>.</p>
+<h1 id="tsduck-installation-on-ubuntu-1804-lts">TSDuck Installation on Ubuntu 18.04 LTS</h1>
+<!-- Restructure and put in the very end -->
+
+<p>This is a little how-to on building TSduck for Ubuntu 18.04 LTS with SRT support.</p>
+<h2 id="get-the-source-code-and-build-it">Get the source code and build it</h2>
+<h3 id="building-instructions">Building instructions:</h3>
+<p>see building instructions at: <a href="https://tsduck.io/doxy/building.html">https://tsduck.io/doxy/building.html</a></p>
+<pre><code>mkdir tsduck
+cd tsduck
+git clone https://github.com/tsduck/tsduck.git
+</code></pre>
+
+<p>Execute the shell-script:</p>
+<pre><code>build/install-prerequisites.sh
+</code></pre>
+
+<p>It downloads and installs the requested packages which are necessary to  build TSDuck. The list of packages and how to install them depend on the operating system distribution and version.</p>
+<h3 id="building-without-specialized-dependencies">Building without specialized dependencies</h3>
+<p>In specific configurations, you may want to disable some external libraries such as <code>libcurl</code> or <code>pcsc-lite</code>. Of course, the corresponding features in TSDuck will be disabled but the impact is limited. For instance, disabling <code>libcurl</code> will disable the plugin <code>http</code> (the plugin will still be there but it will report an error when used).</p>
+<p>The following <code>make</code> variables can be defined:</p>
 <ul>
-<li>Oliver Crête. <a href="https://www.collabora.com/news-and-blog/blog/2018/02/16/srt-in-gstreamer/">SRT in GStreamer</a>. 2018</li>
+<li><code>NOTEST</code> : Do not build unitary tests.</li>
+<li><code>NODTAPI</code> : No Dektec support, remove dependency to <code>DTAPI</code>.</li>
+<li><code>NOCURL</code> : No HTTP support, remove dependency to <code>libcurl</code>.</li>
+<li><code>NOPCSC</code> : No smartcard support, remove dependency to <code>pcsc-lite</code>.</li>
+<li><code>NOSRT</code> : No SRT (Secure Reliable Transport), remove dependency to <code>libsrt</code>.</li>
+<li><code>NOTELETEXT</code> : No Teletext support, remove teletext handling code.</li>
 </ul>
+<pre><code>make NOPCSC=1 NOCURL=1 NODTAPI=1
+</code></pre>
+
+<p>To speed up the compilation time a optional number of parallel threads can be set with the option <code>-j 10</code> make would use 10 parallel threads:</p>
+<pre><code>make -j10 NOPCSC=1 NOCURL=1 NODTAPI=1
+</code></pre>
+
+<h3 id="set-path-to-run-from-directory">Set PATH to run from directory</h3>
+<p>On all Unix systems, the binaries, plugins and tests are built in  subdirectories of their respective source directories. Specifically, the tools and plugins are not in the same directory.</p>
+<p>To run a tool from its build directory, a few environment variables shall be defined (including <code>$PATH</code>). A shell-script named <code>setenv.sh</code> is automatically created in each build directory. This script defines  the appropriate environment for running binaries which are in this build directory.</p>
+<p>Depending on your target (release vs. debug, 32 bits vs. 64 bits, Intel vs. ARM), execute one of: </p>
+<pre><code>source src/tstools/release-x86_64/setenv.sh
+source src/tstools/debug-x86_64/setenv.sh
+source src/tstools/release-i386/setenv.sh
+source src/tstools/debug-i386/setenv.sh
+source src/tstools/release-arm/setenv.sh
+source src/tstools/debug-arm/setenv.sh
+</code></pre>
+
+<p>Note the usage of the <code>source</code> command to make sure that the environment variables are defined in the current shell.</p>
+<p>Example: </p>
+<pre><code>$ source src/tstools/release-x86_64/setenv.sh
+$ which tsp
+~/tsduck/src/tstools/release-x86_64/tsp
+$ tsp --version
+tsp: TSDuck - The MPEG Transport Stream Toolkit - version 3.12-730
+</code></pre>
+
+<h3 id="optionally-install-tsduck-on-system">Optionally install TSDuck on system</h3>
+<pre><code>sudo make install
+</code></pre>
+
+<h3 id="cleaning-up">Cleaning up</h3>
+<p>On Linux and macOS, the same cleanup task is achieved using the following command: </p>
+<pre><code>make distclean
+</code></pre>
+
+<h1 id="how-to-replay-a-ts-file-as-a-stream">How to replay a .ts file as a stream</h1>
+<p><!-- Change the title -->
+<!-- Some intro --></p>
+<h2 id="1-use-tsanalyze-to-find-out-a-bitrate-of-the-stream">1. Use <code>tsanalyze</code> to find out a bitrate of the stream</h2>
+<pre><code>tsanalyze /home/n00b/Videos/StressTest_4KP25_h264.ts 
+
+===============================================================================
+|  TRANSPORT STREAM ANALYSIS REPORT                                           |
+|=============================================================================|
+|  Transport Stream Id: .......... 1 (0x0001)  |  Services: .............. 1  |
+|  Bytes: ....................... 349,332,952  |  PID's: Total: .......... 4  |
+|  TS packets: .................... 1,858,154  |         Clear: .......... 4  |
+|     With invalid sync: .................. 0  |         Scrambled: ...... 0  |
+|     With transport error: ............... 0  |         With PCR's: ..... 1  |
+|     Suspect and ignored: ................ 0  |         Unreferenced: ... 0  |
+|-----------------------------------------------------------------------------|
+|  Transport stream bitrate, based on ....... 188 bytes/pkt    204 bytes/pkt  |
+|  User-specified: ................................... None             None  |
+|  Estimated based on PCR's: ............... 55,933,494 b/s   60,693,792 b/s  |
+                                             ^^^^^^^^^^^^^^
+                                             ||||||||||||||
+                                             bitrate of the stream
+</code></pre>
+
+<h2 id="2-replay-ts-file-as-mpeg-ts-udp-stream">2. Replay <code>.ts</code> file as MPEG-TS UDP stream</h2>
+<pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate --bitrate 55933496 -O ip 192.168.2.49:4904
+</code></pre>
+
+<p>The specification of bitrate of the stream can also be set automatically without use of the <code>--bitrate</code> option:</p>
+<pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O ip 192.168.2.49:4904
+</code></pre>
+
+<h2 id="3-srt-as-input-or-output-caller-vs-listener">3. SRT as input or output: Caller vs Listener:</h2>
+<!-- Something is missing in the title -->
+
+<p>SRTInputPlugin is caller only and the SRTOutputPlugin listener only (except for rendezvous mode supported by both).</p>
+<!-- Do not understand the text here -->
+
+<p>Rendezvous mode can be initialised with following parameter:</p>
+<pre><code># Input
+tsp -I srt --rendezvous address:port -P ... -O ...
+
+# Output
+tsp -I ... -P ... -O srt --rendezvous address:port
+</code></pre>
+
+<h2 id="4-replay-ts-file-as-srt-listener-stream">4. Replay <code>.ts</code> file as SRT-Listener stream</h2>
+<!-- Title -->
+
+<p>In my case I had to set the path to SRT library after building and installing it using <code>make</code> &amp; <code>sudo make install</code>, so that TSDuck finds the <code>srtlib.so.1.</code>
+<!-- ??? --></p>
+<pre><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
+</code></pre>
+
+<p>Now it's time to get started. There are some differences with the TSDuck SRT implementation compared to other SRT applications. Typically you only specify a port without IP like <code>srt://:4900</code> and a SRT-listener on port 4900 will be created. If you specify an IP:port combination, SRT typically would act as SRT-caller to that IP:port (e.g. <code>srt://192.168.2.49:4900</code>)</p>
+<!-- Is there any plan to fix this in TSDuck ? -->
+
+<p>However, with TSDuck it seems you only can create a listener port and need to specify the adapter, which it should listen on. In this test the linux machine has two interfaces and the one with IP <code>192.168.2.3</code> was chosen to act as listening interface.</p>
+<pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt &quot;192.168.2.3:4900&quot; --transtype live --messageapi
+</code></pre>
+
+<p>It is also possible to just specify the port without a particular interface to use:</p>
+<pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt 4900 --transtype live --messageapi
+</code></pre>
+
+<p>A detail worth mentioning: <code>-O srt "IP:Port"</code> for <code>tsp</code> already specifies the usage if the srt protocol. So there is no need to add the <code>srt://</code> prefix to the IP or DNS-name. Adding it would actually result in an error.</p>
+<p>Now another SRT application can connect to that SRT stream on <code>192.168.2.3:4900</code> provided by <code>tsp</code>, e.g., <a href="https://github.com/Haivision/srt/blob/master/docs/srt-live-transmit.md">srt-live-transmit</a> sample application to flip it back to MPEG-TS.</p>
+<pre><code>srt-live-transmit.exe srt://192.168.2.3:4900 udp://192.168.2.49:10002
+</code></pre>
+
+<p>Or VLC player: press <code>CTRL+N</code> to open a new network stream and type in URL <code>srt://192.168.2.3:4900</code> to connect to the stream in this example.</p>
+<h1 id="analyzing-incoming-srt-stream">Analyzing incoming SRT stream</h1>
+<p>Incoming SRT stream containing MPEG-TS one can also be analyzed. Only SRT caller mode is supported. The following example would connect to the SRT stream, which was sent out using <code>tsp</code> as described in the section above and perform an analysis for 10 seconds:</p>
+<pre><code>tsp -I srt 192.168.2.3:4900 --transtype live --messageapi -P until --seconds 10 -P analyze -O drop
+</code></pre>
+
+<p>This could also be done without specifying the interface to listen on (Please note, this would be still a caller to localhost, not a SRT listen port):</p>
+<pre><code>tsp -I srt 4900 --transtype live --messageapi -P until --seconds 10 -P analyze -O drop
+</code></pre>
+
+<p>It would generate an output to <code>stdout</code> like this (shortened)</p>
+<pre><code>===============================================================================
+|  TRANSPORT STREAM ANALYSIS REPORT                                           |
+|=============================================================================|
+|  Transport Stream Id: .......... 1 (0x0001)  |  Services: .............. 1  |
+|  Bytes: ........................ 99,391,840  |  PID's: Total: .......... 4  |
+|  TS packets: ...................... 528,680  |         Clear: .......... 4  |
+|     With invalid sync: .................. 0  |         Scrambled: ...... 0  |
+|     With transport error: ............... 0  |         With PCR's: ..... 1  |
+|     Suspect and ignored: ................ 0  |         Unreferenced: ... 0  |
+|-----------------------------------------------------------------------------|
+|  Transport stream bitrate, based on ....... 188 bytes/pkt    204 bytes/pkt  |
+|  User-specified: ......................... 69,642,777 b/s   75,569,821 b/s  |
+|  Estimated based on PCR's: ............... 58,771,501 b/s   63,773,331 b/s  |
+|-----------------------------------------------------------------------------|
+|  Broadcast time: .................................... 11 sec (0 mn 11 sec)  |
+|-----------------------------------------------------------------------------|
+|  Srv Id  Service Name                              Access          Bitrate  |
+|  0x0001  Service01 .................................... C   67,660,510 b/s  |
+|                                                                             |
+|  Note 1: C=Clear, S=Scrambled                                               |
+|  Note 2: Unless specified otherwise, bitrates are based on 188 bytes/pkt    |
+===============================================================================
+...
+output was cut off here. for more details perform this on your stream or see
+TSDuck manual
+...
+</code></pre>
                 
                   
                 
@@ -857,7 +842,7 @@ byte-stream=true threads=1 key-int-max=15 intra-refresh=true \
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../ffmpeg/" title="FFmpeg" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../obs-studio/" title="About OBS Studio" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -866,19 +851,19 @@ byte-stream=true threads=1 key-int-max=15 intra-refresh=true \
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                FFmpeg
+                About OBS Studio
               </span>
             </div>
           </a>
         
         
-          <a href="../obs-studio/" title="About OBS Studio" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../vlc-media-player/" title="VLC Media Player" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                About OBS Studio
+                VLC Media Player
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
