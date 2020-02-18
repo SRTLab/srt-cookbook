@@ -1,7 +1,3 @@
-# Name of the article
-
-<!-- Some intro -->
-
 # About TSDuck
 
 TSDuck is an extensible toolkit for MPEG/DVB transport streams. TSDuck is used in digital television systems for test, monitoring, integration, debug, lab, demo.
