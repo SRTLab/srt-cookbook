@@ -1,6 +1,6 @@
 # FFmpeg
 
-FFmpeg supports SRT protocol out of the box. But it needs to be built with `-enable-protocol=libsrt` to include SRT.
+FFmpeg supports SRT protocol out of the box. But it needs to be built with the configure flag `--enable-libsrt` to include SRT.
 
 Refer to [FFmpeg's Compilation Guide](https://trac.ffmpeg.org/wiki/CompilationGuide) for build instructions for your platform.
 
