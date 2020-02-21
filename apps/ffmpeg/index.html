@@ -709,7 +709,7 @@
                 
                 
                 <h1 id="ffmpeg">FFmpeg</h1>
-<p>FFmpeg supports SRT protocol out of the box. But it needs to be built with <code>-enable-protocol=libsrt</code> to include SRT.</p>
+<p>FFmpeg supports SRT protocol out of the box. But it needs to be built with the configure flag <code>--enable-libsrt</code> to include SRT.</p>
 <p>Refer to <a href="https://trac.ffmpeg.org/wiki/CompilationGuide">FFmpeg's Compilation Guide</a> for build instructions for your platform.</p>
 <p>A list of the available protocols can be determined by calling <code>ffmpeg -protocols</code>.  "srt" (or "libsrt") should be listed both as an input, and as an output protocol.</p>
 <p>Once SRT is available, an SRT output can be specified like this:</p>
