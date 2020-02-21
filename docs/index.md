@@ -14,5 +14,7 @@ Alex Converse | August 2019
 
 * [UDT Documentation](http://udt.sourceforge.net/doc.html)
 
+* The official Debian package and the configuration files: [link](https://salsa.debian.org/debian/libsrt/tree/master/debian)
+
 * SRT: How the hot new UDP video protocol actually works under the hood - Alex Converse | August 2019. [YouTube](https://www.youtube.com/watch?v=m1FABQtAjgU)
 
