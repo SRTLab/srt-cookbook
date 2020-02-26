@@ -362,16 +362,56 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-build-srt-with-vcpkg" class="md-nav__link">
-    1. Build SRT with vcpkg
+  <a href="#1-configure-vcpkg" class="md-nav__link">
+    1. Configure vcpkg
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-build-srt-with-openssl-and-pthreads-built-with-vcpkg" class="md-nav__link">
-    2. Build SRT with openssl and pthreads built with vcpkg
+  <a href="#2-build-srt" class="md-nav__link">
+    2. Build SRT
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-build-with-vcpkg" class="md-nav__link">
+    2.1. Build with vcpkg
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-build-srt-from-sources" class="md-nav__link">
+    2.2. Build SRT from sources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-build-openssl-and-pthreads" class="md-nav__link">
+    2.2.1. Build openssl and pthreads
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-build-srt-library" class="md-nav__link">
+    2.2.2. Build SRT library
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -664,16 +704,56 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-build-srt-with-vcpkg" class="md-nav__link">
-    1. Build SRT with vcpkg
+  <a href="#1-configure-vcpkg" class="md-nav__link">
+    1. Configure vcpkg
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-build-srt-with-openssl-and-pthreads-built-with-vcpkg" class="md-nav__link">
-    2. Build SRT with openssl and pthreads built with vcpkg
+  <a href="#2-build-srt" class="md-nav__link">
+    2. Build SRT
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-build-with-vcpkg" class="md-nav__link">
+    2.1. Build with vcpkg
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-build-srt-from-sources" class="md-nav__link">
+    2.2. Build SRT from sources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-build-openssl-and-pthreads" class="md-nav__link">
+    2.2.1. Build openssl and pthreads
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-build-srt-library" class="md-nav__link">
+    2.2.2. Build SRT library
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -695,26 +775,60 @@
                 
                 
                 <h1 id="vcpkg-library-manager">Vcpkg Library Manager</h1>
-<p>SRT is included in <code>vcpkg</code> (<a href="https://github.com/microsoft/vcpkg/pull/8712">PR 8712</a>). Vcpkg is C++ Library Manager for Windows, Linux, and MacOS. There are two options to build SRT using <code>vcpkg</code>.</p>
-<h3 id="1-build-srt-with-vcpkg">1. Build SRT with vcpkg</h3>
-<p>Once SRT is added to the list of supported ports of vcpkg, the buld will be:</p>
+<p><a href="https://github.com/microsoft/vcpkg">vcpkg</a> is a C++ library manager for Windows, Linux and MacOS. Consider its <a href="https://github.com/microsoft/vcpkg/blob/master/README.md#quick-start">prerequisites</a> before going further. </p>
+<p>The <code>vcpkg</code> library manager has preconfigured building procedures for <code>OpenSSL</code> and <code>pthreads</code> libraries. They can be easily built and further used as dependencies of SRT library.</p>
+<p><strong>Note!</strong> <code>vcpkg</code> does not support <code>LibreSSL</code> or <code>MbedTLS</code> libraries.</p>
+<h2 id="1-configure-vcpkg">1. Configure vcpkg</h2>
+<p>Clone <code>vcpkg</code> using git, and build it.</p>
+<pre><code>git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+</code></pre>
+
+<p>The current working directory will further be referenced as <code>VCPKG_ROOT</code>.</p>
+<pre><code>set VCPKG_ROOT=%cd%
+</code></pre>
+
+<h2 id="2-build-srt">2. Build SRT</h2>
+<p>There are two options to build SRT using <code>vcpkg</code>: by <code>vcpkg</code> itself (Section 2.1) or use <code>vcpkg</code> to build <code>openssl</code> and <code>pthreads</code>, and then build SRT from sources (Section 2.2). The second case makes it possible to build the latest SRT version, while the first case builds only the version included in <code>vcpkg</code>.</p>
+<h3 id="21-build-with-vcpkg">2.1. Build with vcpkg</h3>
+<p>SRT is included in <code>vcpkg</code> (<a href="https://github.com/microsoft/vcpkg/pull/8712">PR 8712</a>). Therefore, Vcpkg can build it with a single command.</p>
 <pre><code class="text">vcpkg install libsrt
 </code></pre>
 
-<h3 id="2-build-srt-with-openssl-and-pthreads-built-with-vcpkg">2. Build SRT with openssl and pthreads built with vcpkg</h3>
-<p>At the moment it can already be used to simplify SRT build. Vcpkg already has ports for <code>openssl</code> and <code>pthreads</code>, so the build is as easy as</p>
-<pre><code class="text">vcpkg install openssl
-vcpkg install pthreads
+<h3 id="22-build-srt-from-sources">2.2. Build SRT from sources</h3>
+<h4 id="221-build-openssl-and-pthreads">2.2.1. Build openssl and pthreads</h4>
+<p>Then build <code>openssl</code> and <code>pthreads</code> libraries using <strong>x64</strong> toolset:</p>
+<pre><code>vcpkg install pthreads --triplet x64-windows
+vcpkg install openssl --triplet x64-windows
 </code></pre>
 
-<p>Integrate vcpkg with the build system (CMake will know about packaged installed by vcpkg)</p>
-<pre><code class="text">vcpkg integrate install
+<p>The next step is to integrate <code>vcpkg</code> with the build system, so that <code>CMake</code> can locate <code>openssl</code> and <code>pthreads</code> libraries.</p>
+<pre><code>vcpkg integrate install
 </code></pre>
 
-<p>Then build SRT:</p>
-<pre><code class="text">cmake ../ -G &quot;Visual Studio 16 2019&quot; -A x64
-             -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake
+<h4 id="222-build-srt-library">2.2.2. Build SRT library</h4>
+<p>Clone the source code of <code>srt</code>.</p>
+<pre><code>git clone https://github.com/Haivision/srt.git srt
 </code></pre>
+
+<p>The current working directory will further be referenced as <code>SRT_ROOT</code>.</p>
+<pre><code>set SRT_ROOT=%cd%
+</code></pre>
+
+<p>From the <code>srt</code> cloned folder <code>SRT_ROOT</code> run <code>cmake</code> to generate build configuration files.</p>
+<pre><code>cd %SRT_ROOT%
+md _build &amp;&amp; cd _build
+cmake ../ -G &quot;Visual Studio 16 2019&quot; -A x64
+          -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%\scripts\buildsystems\vcpkg.cmake
+</code></pre>
+
+<p>where <code>SRT_ROOT</code> and <code>VCPKG_ROOT</code> were defined above.</p>
+<p>To build the project go to <code>%SRT_ROOT%\_build</code> and run:</p>
+<pre><code>cmake --build ./ --config Release
+</code></pre>
+
+<p>Alternatively Visual Studio IDE can be used by opening the generated solution file <code>SRT.sln</code> in the <code>_build</code> folder.</p>
                 
                   
                 
