@@ -4,6 +4,8 @@ FFmpeg supports SRT protocol out of the box. But it needs to be built with the c
 
 Refer to [FFmpeg's Compilation Guide](https://trac.ffmpeg.org/wiki/CompilationGuide) for build instructions for your platform.
 
+**Note.** There is the [feedback](https://github.com/Haivision/srt/issues/1176) that SRT can't be built by ffmpeg if both `--enable-libsrt` and `--enable-shared` options are specified.
+
 A list of the available protocols can be determined by calling `ffmpeg -protocols`.  "srt" \(or "libsrt"\) should be listed both as an input, and as an output protocol.
 
 Once SRT is available, an SRT output can be specified like this:
