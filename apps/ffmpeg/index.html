@@ -741,6 +741,12 @@
 <pre><code class="text">&quot;srt://&lt;destination_ip&gt;:&lt;destination_port&gt;&quot;
 </code></pre>
 
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that FFMpeg expects latency to be specified in microseconds.
+So the following URI would mean 3 ms, not 3 seconds:
+<code>srt://&lt;ip&gt;:&lt;port&gt;?latency=3000</code></p>
+</div>
 <p>It would be a good idea to use MPEG-TS as a container <code>-f mpegts</code>.</p>
 <p><code>ffplay</code> should be able to play SRT streaming with <code>ffplay srt://&lt;ip&gt;:&lt;port&gt;</code>.</p>
 <p>Piping can be used as well like this:</p>
