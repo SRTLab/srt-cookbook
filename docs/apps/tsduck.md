@@ -1,4 +1,4 @@
-# About TSDuck
+# TSDuck
 
 TSDuck is an extensible toolkit for MPEG/DVB transport streams. TSDuck is used in digital television systems for test, monitoring, integration, debug, lab, demo.
 
@@ -15,16 +15,16 @@ In practice, TSDuck is used for:
 
 For detailed information, guidelines and use cases, please visit [TSDuck website](https://tsduck.io/).
 
-# TSDuck Installation on Ubuntu 18.04 LTS
+## TSDuck Installation on Ubuntu 18.04 LTS
 <!-- Restructure and put in the very end -->
 
 This is a little how-to on building TSduck for Ubuntu 18.04 LTS with SRT support.
 
-## Get the source code and build it
+### Biuld from Source
 
-### Building instructions: 
+#### Building instructions 
 
-see building instructions at: [https://tsduck.io/doxy/building.html](https://tsduck.io/doxy/building.html)
+See building instructions at: [https://tsduck.io/doxy/building.html](https://tsduck.io/doxy/building.html)
 
 ```
 mkdir tsduck
@@ -40,7 +40,7 @@ build/install-prerequisites.sh
 
 It downloads and installs the requested packages which are necessary to  build TSDuck. The list of packages and how to install them depend on the operating system distribution and version.
 
-### Building without specialized dependencies
+#### Building without specialized dependencies
 
 In specific configurations, you may want to disable some external libraries such as `libcurl` or `pcsc-lite`. Of course, the corresponding features in TSDuck will be disabled but the impact is limited. For instance, disabling `libcurl` will disable the plugin `http` (the plugin will still be there but it will report an error when used).
 
@@ -63,7 +63,7 @@ To speed up the compilation time a optional number of parallel threads can be se
 make -j10 NOPCSC=1 NOCURL=1 NODTAPI=1
 ```
 
-### Set PATH to run from directory
+#### Set PATH to run from directory
 
 On all Unix systems, the binaries, plugins and tests are built in  subdirectories of their respective source directories. Specifically, the tools and plugins are not in the same directory.
 
@@ -92,13 +92,13 @@ $ tsp --version
 tsp: TSDuck - The MPEG Transport Stream Toolkit - version 3.12-730
 ```
 
-### Optionally install TSDuck on system
+#### Optionally install TSDuck on system
 
 ```
 sudo make install
 ```
 
-### Cleaning up
+#### Cleaning up
 
 On Linux and macOS, the same cleanup task is achieved using the following command: 
 
@@ -106,11 +106,11 @@ On Linux and macOS, the same cleanup task is achieved using the following comman
 make distclean
 ```
 
-# How to replay a .ts file as a stream
+## How to replay a .ts file as a stream
 <!-- Change the title -->
 <!-- Some intro -->
 
-## 1. Use `tsanalyze` to find out a bitrate of the stream
+### 1. Use `tsanalyze` to find out a bitrate of the stream
 
 ```
 tsanalyze /home/n00b/Videos/StressTest_4KP25_h264.ts 
@@ -133,7 +133,7 @@ tsanalyze /home/n00b/Videos/StressTest_4KP25_h264.ts
                                              bitrate of the stream
 ```
 
-## 2. Replay `.ts` file as MPEG-TS UDP stream
+### 2. Replay `.ts` file as MPEG-TS UDP stream
 
 ```
 tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate --bitrate 55933496 -O ip 192.168.2.49:4904
@@ -145,7 +145,7 @@ The specification of bitrate of the stream can also be set automatically without
 tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O ip 192.168.2.49:4904
 ```
 
-## 3. SRT as input or output: Caller vs Listener:
+### 3. SRT as input or output: Caller vs Listener:
 <!-- Something is missing in the title -->
 
 SRTInputPlugin is caller only and the SRTOutputPlugin listener only (except for rendezvous mode supported by both).
@@ -155,14 +155,14 @@ SRTInputPlugin is caller only and the SRTOutputPlugin listener only (except for 
 Rendezvous mode can be initialised with following parameter:
 
 ```
-# Input
+## Input
 tsp -I srt --rendezvous address:port -P ... -O ...
 
-# Output
+## Output
 tsp -I ... -P ... -O srt --rendezvous address:port
 ```
 
-## 4. Replay `.ts` file as SRT-Listener stream
+### 4. Replay `.ts` file as SRT-Listener stream
 <!-- Title -->
 
 In my case I had to set the path to SRT library after building and installing it using `make` & `sudo make install`, so that TSDuck finds the `srtlib.so.1.`
@@ -198,7 +198,7 @@ srt-live-transmit.exe srt://192.168.2.3:4900 udp://192.168.2.49:10002
 
 Or VLC player: press `CTRL+N` to open a new network stream and type in URL `srt://192.168.2.3:4900` to connect to the stream in this example.
 
-# Analyzing incoming SRT stream
+## Analyzing incoming SRT stream
 
 Incoming SRT stream containing MPEG-TS one can also be analyzed. Only SRT caller mode is supported. The following example would connect to the SRT stream, which was sent out using `tsp` as described in the section above and perform an analysis for 10 seconds:
 
