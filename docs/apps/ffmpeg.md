@@ -14,6 +14,11 @@ Once SRT is available, an SRT output can be specified like this:
 "srt://<destination_ip>:<destination_port>"
 ```
 
+!!! note
+    Note that FFMpeg expects latency to be specified in microseconds.
+    So the following URI would mean 3 ms, not 3 seconds:
+    `srt://<ip>:<port>?latency=3000`
+
 It would be a good idea to use MPEG-TS as a container `-f mpegts`.
 
 `ffplay` should be able to play SRT streaming with `ffplay srt://<ip>:<port>`.
