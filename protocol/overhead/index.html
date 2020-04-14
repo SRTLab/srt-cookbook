@@ -688,6 +688,7 @@ function calcOverhead(Mbps, loss_ratio, latency_xrtt) {
   const MAX_PLD = 1316;
   const DATA_HDR_BYTES = 24;
   const ACK_BYTES = 44;
+  const LITE_ACK_BYTES = 20;
   const ACKACK_BYTES = 16;
   const NAK_BYTES = 16 + 4;
 
@@ -697,6 +698,11 @@ function calcOverhead(Mbps, loss_ratio, latency_xrtt) {
   const ack_pkts       = 1000 / 10;   // Every 10 ms
   const ack_bytes      = ack_pkts * ACK_BYTES;
   const ackack_bytes   = ack_pkts * ACKACK_BYTES;
+
+  // -1 for the last Lite ACK where Full ACK will probably be sent
+  const lack_pkts      = Math.floor(Math.max(0, data_pkts / 64 - 1));
+  console.log(bps + ": LiteACK " + lack_pkts + " ACK " + ack_pkts);
+  const lack_bytes     = lack_pkts * LITE_ACK_BYTES;
 
   const lost_pkts      = Math.ceil(data_pkts * loss_ratio);
   const nak_bytes      = lost_pkts * NAK_BYTES;
@@ -708,6 +714,7 @@ function calcOverhead(Mbps, loss_ratio, latency_xrtt) {
   return {
     dataHdrBytes: data_hdr_bytes,
     ackBytes: ack_bytes,
+    liteackBytes: lack_bytes,
     ackackBytes: ackack_bytes,
     nakBytes: nak_bytes,
     resendBytes: resend_bytes
@@ -718,6 +725,7 @@ function createDataSet(beginMbps, endMbps, stepMbps, lossRatio = 0) {
   let bitrates = [];
   let dataHeaderBits = [];
   let ackBits = [];
+  let liteackBits = [];
   let ackackBits = [];
   let nakBits = [];
   let resendBits = [];
@@ -726,12 +734,11 @@ function createDataSet(beginMbps, endMbps, stepMbps, lossRatio = 0) {
   // _.range(10); // => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   for (let Mbps = beginMbps; Mbps < endMbps; Mbps += stepMbps) {
-    //console.log(Mbps);
-    //const {dataHdrBits, ackBits, ackackBits, nakBits, resendBits} = calcOverhead(Mbps, 0, 0);
-    const {dataHdrBytes, ackBytes, ackackBytes, nakBytes, resendBytes} = calcOverhead(Mbps, lossRatio, 0);
+    const {dataHdrBytes, ackBytes, liteackBytes, ackackBytes, nakBytes, resendBytes} = calcOverhead(Mbps, lossRatio, 0);
     bitrates.push(Mbps);
     dataHeaderBits.push(((8 * dataHdrBytes) / (Mbps * 10000)).toFixed(3));
     ackBits.push(((8 * ackBytes) / (Mbps * 10000)).toFixed(3));
+    liteackBits.push(((8 * liteackBytes) / (Mbps * 10000)).toFixed(3));
     ackackBits.push(((8 * ackackBytes) / (Mbps * 10000)).toFixed(3));
     nakBits.push(((8 * nakBytes) / (Mbps * 10000)).toFixed(3));
     resendBits.push(((8 * resendBytes) / (Mbps * 10000)).toFixed(3));
@@ -741,6 +748,7 @@ function createDataSet(beginMbps, endMbps, stepMbps, lossRatio = 0) {
     bitratesMbps: bitrates,
     dataHeaderBits: dataHeaderBits,
     ackBits: ackBits,
+    liteackBits: liteackBits,
     ackackBits: ackackBits,
     nakBits: nakBits,
     resendBits: resendBits
@@ -757,6 +765,9 @@ const colors = {
   lightBlue: {
     stroke: '#6fccdd',
   },
+  yellow: {
+    stroke: '#FFFACD',
+  },
   darkBlue: {
     fill: '#92bed2',
     stroke: '#3282bf',
@@ -772,9 +783,10 @@ function onLossRatioChanged(value) {
   dataSet = createDataSet(1, 30, 1, value / 100);
   myChart.data.datasets[0].data = dataSet.dataHeaderBits;
   myChart.data.datasets[1].data = dataSet.ackBits;
-  myChart.data.datasets[2].data = dataSet.ackackBits;
-  myChart.data.datasets[3].data = dataSet.nakBits;
-  myChart.data.datasets[4].data = dataSet.resendBits;
+  myChart.data.datasets[2].data = dataSet.liteackBits;
+  myChart.data.datasets[3].data = dataSet.ackackBits;
+  myChart.data.datasets[4].data = dataSet.nakBits;
+  myChart.data.datasets[5].data = dataSet.resendBits;
   //console.log(myChart.data.datasets);
   myChart.update();
 }
@@ -806,6 +818,15 @@ var myChart = new Chart(ctx, {
       pointHighlightStroke: colors.darkBlue.stroke,
       borderCapStyle: 'butt',
       data: dataSet.ackBits,
+    }, {
+      label: "Lite ACK Bits",
+      fill: true,
+      backgroundColor: colors.yellow.fill,
+      pointBackgroundColor: colors.yellow.stroke,
+      borderColor: colors.yellow.stroke,
+      pointHighlightStroke: colors.yellow.stroke,
+      borderCapStyle: 'butt',
+      data: dataSet.liteackBits,
     }, {
       label: "ACKACK Bits",
       fill: true,
