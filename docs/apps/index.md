@@ -9,6 +9,7 @@ SRT is used by thousands of organizations globally in a wide range of industry a
 ## Open Source Projects
 
 * VLC Media Player [[Website]](https://www.videolan.org/vlc/index.html)
+* MPV Player [[PR submitted]](https://github.com/mpv-player/mpv/pull/8139)
 * GStreamer [[Website]](https://gstreamer.freedesktop.org/)
 * Wireshark [[Website]](https://www.wireshark.org/)
 * FFmpeg [[Website]](https://www.ffmpeg.org/)
