@@ -209,4 +209,33 @@ Now search for `UDT` and uncheck the UDT-options which are displayed like shown 
 
 Now you can import your captured .pcapng file or start a live capture from inside the Wireshark GUI.
 
-A list of possible "display filters"for the SRT protocol can be found at the [Wireshark SRT Display Filter Reference page](https://www.wireshark.org/docs/dfref/s/srt.html).
+A list of possible "display filters" for the SRT protocol can be found at the [Wireshark SRT Display Filter Reference page](https://www.wireshark.org/docs/dfref/s/srt.html).
+
+There are cases when Wireshark will not pass the remainder of the UDP packet to sub-dissectors.
+SRT is a sub-dissector of UDP.
+This case is in the `decode_udp_ports` function of Wireshark, and has the following comment description:
+
+```
+Do lookups with the subdissector table.
+We try the port number with the lower value first, followed by the
+port number with the higher value.  This means that, for packets
+where a dissector is registered for both port numbers:
+
+   1) we pick the same dissector for traffic going in both directions;
+
+   2) we prefer the port number that's more likely to be the right
+      one (as that prefers well-known ports to reserved ports);
+
+although there is, of course, no guarantee that any such strategy
+will always pick the right port number.
+
+XXX - we ignore port numbers of 0, as some dissectors use a port
+number of 0 to disable the port, and as RFC 768 says that the source
+port in UDP datagrams is optional and is 0 if not used.
+```
+
+:exclamation: Wireshark offers a workaround for this. You have to set the following advanced option:
+`Edit -> Preferences -> Advanced: udp.try_heuristic_first = TRUE`.
+This will make a UDP packet to be passes to sub-dissectors first.
+
+![./img/wireshark-heuristic.png](img/wireshark-heuristic.png)
