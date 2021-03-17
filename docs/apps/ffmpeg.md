@@ -61,6 +61,15 @@ ffmpeg -f lavfi -re -i smptebars=duration=60:size=1280x720:rate=30 -f lavfi -re 
        -preset veryfast -f mpegts "srt://127.0.0.1:4200?pkt_size=1316"
 ```
 
+
+## FFmpeg example: RTSP to SRT
+
+```shell
+ffmpeg -i rtsp://<src_rtsp_uri> -c copy -f mpegts srt://<target_srt_uri>
+```
+
+See also [rtsp2srt](https://github.com/snowgames95/rtsp2srt) project.
+
 ## Example with FFmpeg and srt-live-transmit
 
 Send to UDP localhost port 5000
