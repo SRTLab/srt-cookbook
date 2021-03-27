@@ -4,23 +4,25 @@ TSDuck is an extensible toolkit for MPEG/DVB transport streams. TSDuck is used i
 
 In practice, TSDuck is used for:
 
-* Transport stream acquisition or transmodulation, including DVB, ATSC, ASI and IP multicast.
+* Transport stream acquisition or transmodulation, including DVB, ATSC, ISDB, ASI and IP multicast.
 * Analyze transport streams, PSI/SI signalization, bitrates, timestamps.
 * Monitor and report conditions on the stream (video and audio properties, bitrates, crypto-periods, signalization).
 * On-the-fly transformation or injection of content and signalization.
 * Modify, remove, rename, extract services.
 * Work on live transport streams, DVB-S/C/T, ATSC, ASI, IP-TV, HTTP, HLS, SRT or offline transport stream files.
 * Re-route transport streams to other applications.
+* Receive from or send to specialized hardware such as cheap tuners, Dektec or HiDes devices and modulators.
+* Extract or inject MPE, SCTE 35, extract Teletext, T2-MI.
 * And more...
 
 For detailed information, guidelines and use cases, please visit [TSDuck website](https://tsduck.io/).
 
-## TSDuck Installation on Ubuntu 18.04 LTS
+## TSDuck Installation on Ubuntu 20.04 LTS
 <!-- Restructure and put in the very end -->
 
-This is a little how-to on building TSduck for Ubuntu 18.04 LTS with SRT support.
+This is a little how-to on building TSduck for Ubuntu 20.04 LTS with SRT support.
 
-### Biuld from Source
+### Build from Source
 
 #### Building instructions 
 
@@ -38,7 +40,7 @@ Execute the shell-script:
 build/install-prerequisites.sh
 ```
 
-It downloads and installs the requested packages which are necessary to  build TSDuck. The list of packages and how to install them depend on the operating system distribution and version.
+It downloads and installs the requested packages which are necessary to build TSDuck. The list of packages and how to install them depend on the operating system distribution and version.
 
 #### Building without specialized dependencies
 
@@ -57,7 +59,7 @@ The following `make` variables can be defined:
 make NOPCSC=1 NOCURL=1 NODTAPI=1
 ```
 
-To speed up the compilation time a optional number of parallel threads can be set with the option `-j 10` make would use 10 parallel threads:
+To speed up the compilation time a optional number of parallel threads can be set with the option `-j10` make would use 10 parallel processes:
 
 ```
 make -j10 NOPCSC=1 NOCURL=1 NODTAPI=1
@@ -65,19 +67,14 @@ make -j10 NOPCSC=1 NOCURL=1 NODTAPI=1
 
 #### Set PATH to run from directory
 
-On all Unix systems, the binaries, plugins and tests are built in  subdirectories of their respective source directories. Specifically, the tools and plugins are not in the same directory.
+On all Unix systems, the binaries, plugins and tests are built inside the `bin` subdirectory.
 
-To run a tool from its build directory, a few environment variables shall be defined (including `$PATH`). A shell-script named `setenv.sh` is automatically created in each build directory. This script defines  the appropriate environment for running binaries which are in this build directory.
+To run a tool from its build directory, a few environment variables shall be defined (including `$PATH`). A shell-script named `setenv.sh` in the `build` directory defines the appropriate environment for running binaries.
 
-Depending on your target (release vs. debug, 32 bits vs. 64 bits, Intel vs. ARM), execute one of: 
+Execute:
 
 ```
-source src/tstools/release-x86_64/setenv.sh
-source src/tstools/debug-x86_64/setenv.sh
-source src/tstools/release-i386/setenv.sh
-source src/tstools/debug-i386/setenv.sh
-source src/tstools/release-arm/setenv.sh
-source src/tstools/debug-arm/setenv.sh
+source build/setenv.sh
 ```
 
 Note the usage of the `source` command to make sure that the environment variables are defined in the current shell.
@@ -85,11 +82,11 @@ Note the usage of the `source` command to make sure that the environment variabl
 Example: 
 
 ```
-$ source src/tstools/release-x86_64/setenv.sh
+$ source build/setenv.sh 
 $ which tsp
-~/tsduck/src/tstools/release-x86_64/tsp
+~/tsduck/bin/release-x86_64-vmubuntu/tsp
 $ tsp --version
-tsp: TSDuck - The MPEG Transport Stream Toolkit - version 3.12-730
+tsp: TSDuck - The MPEG Transport Stream Toolkit - version 3.26-2313
 ```
 
 #### Optionally install TSDuck on system
@@ -145,50 +142,33 @@ The specification of bitrate of the stream can also be set automatically without
 tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O ip 192.168.2.49:4904
 ```
 
-### 3. SRT as input or output: Caller vs Listener:
+### 3. SRT as input or output
 <!-- Something is missing in the title -->
 
-SRTInputPlugin is caller only and the SRTOutputPlugin listener only (except for rendezvous mode supported by both).
+Up to TSDuck version 3.25, the `srt` input plugin used the caller mode and the `srt` output plugin used the listener mode.
 
-<!-- Do not understand the text here -->
+From TSDuck version 3.26 onwards, the `srt` input and output plugins can indifferently use caller, listener or rendezvous modes, using the same consistent set of command line options. See the [TSDuck user's guide](https://tsduck.io/download/docs/tsduck.pdf) for a complete reference.
 
-Rendezvous mode can be initialised with following parameter:
-
-```
-## Input
-tsp -I srt --rendezvous address:port -P ... -O ...
-
-## Output
-tsp -I ... -P ... -O srt --rendezvous address:port
-```
+The following examples are based on version 3.26.
 
 ### 4. Replay `.ts` file as SRT-Listener stream
 <!-- Title -->
 
-In my case I had to set the path to SRT library after building and installing it using `make` & `sudo make install`, so that TSDuck finds the `srtlib.so.1.`
-<!-- ??? -->
-
-```
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
-```
-
 Now it's time to get started. There are some differences with the TSDuck SRT implementation compared to other SRT applications. Typically you only specify a port without IP like `srt://:4900` and a SRT-listener on port 4900 will be created. If you specify an IP:port combination, SRT typically would act as SRT-caller to that IP:port (e.g. `srt://192.168.2.49:4900`)
 
-<!-- Is there any plan to fix this in TSDuck ? -->
-
-However, with TSDuck it seems you only can create a listener port and need to specify the adapter, which it should listen on. In this test the linux machine has two interfaces and the one with IP `192.168.2.3` was chosen to act as listening interface.
+With TSDuck, you can create a listener port and optionally specify the adapter, which it should listen on using `--listener port` or `--listener interface:port`. In this test the Linux machine has two interfaces and the one with IP `192.168.2.3` was chosen to act as listening interface.
 
 ```
-tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt "192.168.2.3:4900" --transtype live --messageapi
+tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt --listener 192.168.2.3:4900 --transtype live --messageapi
 ```
 
 It is also possible to just specify the port without a particular interface to use:
 
 ```
-tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt 4900 --transtype live --messageapi
+tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt --listener 4900 --transtype live --messageapi
 ```
 
-A detail worth mentioning: `-O srt "IP:Port"` for `tsp` already specifies the usage if the srt protocol. So there is no need to add the `srt://` prefix to the IP or DNS-name. Adding it would actually result in an error.
+A detail worth mentioning: `-O srt --listener "[IP:]Port"` for `tsp` already specifies the usage of the SRT protocol. So there is no need to add the `srt://` prefix to the IP or DNS-name. Adding it would actually result in an error.
 
 Now another SRT application can connect to that SRT stream on `192.168.2.3:4900` provided by `tsp`, e.g., [srt-live-transmit](https://github.com/Haivision/srt/blob/master/docs/srt-live-transmit.md) sample application to flip it back to MPEG-TS.
 
@@ -200,16 +180,10 @@ Or VLC player: press `CTRL+N` to open a new network stream and type in URL `srt:
 
 ## Analyzing incoming SRT stream
 
-Incoming SRT stream containing MPEG-TS one can also be analyzed. Only SRT caller mode is supported. The following example would connect to the SRT stream, which was sent out using `tsp` as described in the section above and perform an analysis for 10 seconds:
+Incoming SRT stream containing MPEG-TS one can also be analyzed. The following example would connect in caller mode to the SRT stream, which was sent out using `tsp` as described in the section above and perform an analysis for 10 seconds:
 
 ```
-tsp -I srt 192.168.2.3:4900 --transtype live --messageapi -P until --seconds 10 -P analyze -O drop
-```
-
-This could also be done without specifying the interface to listen on (Please note, this would be still a caller to localhost, not a SRT listen port):
-
-```
-tsp -I srt 4900 --transtype live --messageapi -P until --seconds 10 -P analyze -O drop
+tsp -I srt --caller 192.168.2.3:4900 --transtype live --messageapi -P until --seconds 10 -P analyze -O drop
 ```
 
 It would generate an output to `stdout` like this (shortened)
@@ -238,7 +212,6 @@ It would generate an output to `stdout` like this (shortened)
 |  Note 2: Unless specified otherwise, bitrates are based on 188 bytes/pkt    |
 ===============================================================================
 ...
-output was cut off here. for more details perform this on your stream or see
-TSDuck manual
-...
 ```
+Output was cut off here. For more details perform this on your stream or see
+the [TSDuck user's guide](https://tsduck.io/download/docs/tsduck.pdf).
