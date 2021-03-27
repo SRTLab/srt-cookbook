@@ -284,19 +284,19 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tsduck-installation-on-ubuntu-1804-lts" class="md-nav__link">
-    TSDuck Installation on Ubuntu 18.04 LTS
+  <a href="#tsduck-installation-on-ubuntu-2004-lts" class="md-nav__link">
+    TSDuck Installation on Ubuntu 20.04 LTS
   </a>
   
-    <nav class="md-nav" aria-label="TSDuck Installation on Ubuntu 18.04 LTS">
+    <nav class="md-nav" aria-label="TSDuck Installation on Ubuntu 20.04 LTS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#biuld-from-source" class="md-nav__link">
-    Biuld from Source
+  <a href="#build-from-source" class="md-nav__link">
+    Build from Source
   </a>
   
-    <nav class="md-nav" aria-label="Biuld from Source">
+    <nav class="md-nav" aria-label="Build from Source">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -367,8 +367,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-srt-as-input-or-output-caller-vs-listener" class="md-nav__link">
-    3. SRT as input or output: Caller vs Listener:
+  <a href="#3-srt-as-input-or-output" class="md-nav__link">
+    3. SRT as input or output
   </a>
   
 </li>
@@ -784,19 +784,19 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tsduck-installation-on-ubuntu-1804-lts" class="md-nav__link">
-    TSDuck Installation on Ubuntu 18.04 LTS
+  <a href="#tsduck-installation-on-ubuntu-2004-lts" class="md-nav__link">
+    TSDuck Installation on Ubuntu 20.04 LTS
   </a>
   
-    <nav class="md-nav" aria-label="TSDuck Installation on Ubuntu 18.04 LTS">
+    <nav class="md-nav" aria-label="TSDuck Installation on Ubuntu 20.04 LTS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#biuld-from-source" class="md-nav__link">
-    Biuld from Source
+  <a href="#build-from-source" class="md-nav__link">
+    Build from Source
   </a>
   
-    <nav class="md-nav" aria-label="Biuld from Source">
+    <nav class="md-nav" aria-label="Build from Source">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -867,8 +867,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-srt-as-input-or-output-caller-vs-listener" class="md-nav__link">
-    3. SRT as input or output: Caller vs Listener:
+  <a href="#3-srt-as-input-or-output" class="md-nav__link">
+    3. SRT as input or output
   </a>
   
 </li>
@@ -912,21 +912,23 @@
 <p>TSDuck is an extensible toolkit for MPEG/DVB transport streams. TSDuck is used in digital television systems for test, monitoring, integration, debug, lab, demo.</p>
 <p>In practice, TSDuck is used for:</p>
 <ul>
-<li>Transport stream acquisition or transmodulation, including DVB, ATSC, ASI and IP multicast.</li>
+<li>Transport stream acquisition or transmodulation, including DVB, ATSC, ISDB, ASI and IP multicast.</li>
 <li>Analyze transport streams, PSI/SI signalization, bitrates, timestamps.</li>
 <li>Monitor and report conditions on the stream (video and audio properties, bitrates, crypto-periods, signalization).</li>
 <li>On-the-fly transformation or injection of content and signalization.</li>
 <li>Modify, remove, rename, extract services.</li>
 <li>Work on live transport streams, DVB-S/C/T, ATSC, ASI, IP-TV, HTTP, HLS, SRT or offline transport stream files.</li>
 <li>Re-route transport streams to other applications.</li>
+<li>Receive from or send to specialized hardware such as cheap tuners, Dektec or HiDes devices and modulators.</li>
+<li>Extract or inject MPE, SCTE 35, extract Teletext, T2-MI.</li>
 <li>And more...</li>
 </ul>
 <p>For detailed information, guidelines and use cases, please visit <a href="https://tsduck.io/">TSDuck website</a>.</p>
-<h2 id="tsduck-installation-on-ubuntu-1804-lts">TSDuck Installation on Ubuntu 18.04 LTS</h2>
+<h2 id="tsduck-installation-on-ubuntu-2004-lts">TSDuck Installation on Ubuntu 20.04 LTS</h2>
 <!-- Restructure and put in the very end -->
 
-<p>This is a little how-to on building TSduck for Ubuntu 18.04 LTS with SRT support.</p>
-<h3 id="biuld-from-source">Biuld from Source</h3>
+<p>This is a little how-to on building TSduck for Ubuntu 20.04 LTS with SRT support.</p>
+<h3 id="build-from-source">Build from Source</h3>
 <h4 id="building-instructions">Building instructions</h4>
 <p>See building instructions at: <a href="https://tsduck.io/doxy/building.html">https://tsduck.io/doxy/building.html</a></p>
 <pre><code>mkdir tsduck
@@ -938,7 +940,7 @@ git clone https://github.com/tsduck/tsduck.git
 <pre><code>build/install-prerequisites.sh
 </code></pre>
 
-<p>It downloads and installs the requested packages which are necessary to  build TSDuck. The list of packages and how to install them depend on the operating system distribution and version.</p>
+<p>It downloads and installs the requested packages which are necessary to build TSDuck. The list of packages and how to install them depend on the operating system distribution and version.</p>
 <h4 id="building-without-specialized-dependencies">Building without specialized dependencies</h4>
 <p>In specific configurations, you may want to disable some external libraries such as <code>libcurl</code> or <code>pcsc-lite</code>. Of course, the corresponding features in TSDuck will be disabled but the impact is limited. For instance, disabling <code>libcurl</code> will disable the plugin <code>http</code> (the plugin will still be there but it will report an error when used).</p>
 <p>The following <code>make</code> variables can be defined:</p>
@@ -953,29 +955,24 @@ git clone https://github.com/tsduck/tsduck.git
 <pre><code>make NOPCSC=1 NOCURL=1 NODTAPI=1
 </code></pre>
 
-<p>To speed up the compilation time a optional number of parallel threads can be set with the option <code>-j 10</code> make would use 10 parallel threads:</p>
+<p>To speed up the compilation time a optional number of parallel threads can be set with the option <code>-j10</code> make would use 10 parallel processes:</p>
 <pre><code>make -j10 NOPCSC=1 NOCURL=1 NODTAPI=1
 </code></pre>
 
 <h4 id="set-path-to-run-from-directory">Set PATH to run from directory</h4>
-<p>On all Unix systems, the binaries, plugins and tests are built in  subdirectories of their respective source directories. Specifically, the tools and plugins are not in the same directory.</p>
-<p>To run a tool from its build directory, a few environment variables shall be defined (including <code>$PATH</code>). A shell-script named <code>setenv.sh</code> is automatically created in each build directory. This script defines  the appropriate environment for running binaries which are in this build directory.</p>
-<p>Depending on your target (release vs. debug, 32 bits vs. 64 bits, Intel vs. ARM), execute one of: </p>
-<pre><code>source src/tstools/release-x86_64/setenv.sh
-source src/tstools/debug-x86_64/setenv.sh
-source src/tstools/release-i386/setenv.sh
-source src/tstools/debug-i386/setenv.sh
-source src/tstools/release-arm/setenv.sh
-source src/tstools/debug-arm/setenv.sh
+<p>On all Unix systems, the binaries, plugins and tests are built inside the <code>bin</code> subdirectory.</p>
+<p>To run a tool from its build directory, a few environment variables shall be defined (including <code>$PATH</code>). A shell-script named <code>setenv.sh</code> in the <code>build</code> directory defines the appropriate environment for running binaries.</p>
+<p>Execute:</p>
+<pre><code>source build/setenv.sh
 </code></pre>
 
 <p>Note the usage of the <code>source</code> command to make sure that the environment variables are defined in the current shell.</p>
 <p>Example: </p>
-<pre><code>$ source src/tstools/release-x86_64/setenv.sh
+<pre><code>$ source build/setenv.sh 
 $ which tsp
-~/tsduck/src/tstools/release-x86_64/tsp
+~/tsduck/bin/release-x86_64-vmubuntu/tsp
 $ tsp --version
-tsp: TSDuck - The MPEG Transport Stream Toolkit - version 3.12-730
+tsp: TSDuck - The MPEG Transport Stream Toolkit - version 3.26-2313
 </code></pre>
 
 <h4 id="optionally-install-tsduck-on-system">Optionally install TSDuck on system</h4>
@@ -1019,52 +1016,33 @@ tsp: TSDuck - The MPEG Transport Stream Toolkit - version 3.12-730
 <pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O ip 192.168.2.49:4904
 </code></pre>
 
-<h3 id="3-srt-as-input-or-output-caller-vs-listener">3. SRT as input or output: Caller vs Listener:</h3>
+<h3 id="3-srt-as-input-or-output">3. SRT as input or output</h3>
 <!-- Something is missing in the title -->
 
-<p>SRTInputPlugin is caller only and the SRTOutputPlugin listener only (except for rendezvous mode supported by both).</p>
-<!-- Do not understand the text here -->
-
-<p>Rendezvous mode can be initialised with following parameter:</p>
-<pre><code>## Input
-tsp -I srt --rendezvous address:port -P ... -O ...
-
-## Output
-tsp -I ... -P ... -O srt --rendezvous address:port
-</code></pre>
-
+<p>Up to TSDuck version 3.25, the <code>srt</code> input plugin used the caller mode and the <code>srt</code> output plugin used the listener mode.</p>
+<p>From TSDuck version 3.26 onwards, the <code>srt</code> input and output plugins can indifferently use caller, listener or rendezvous modes, using the same consistent set of command line options. See the <a href="https://tsduck.io/download/docs/tsduck.pdf">TSDuck user's guide</a> for a complete reference.</p>
+<p>The following examples are based on version 3.26.</p>
 <h3 id="4-replay-ts-file-as-srt-listener-stream">4. Replay <code>.ts</code> file as SRT-Listener stream</h3>
 <!-- Title -->
 
-<p>In my case I had to set the path to SRT library after building and installing it using <code>make</code> &amp; <code>sudo make install</code>, so that TSDuck finds the <code>srtlib.so.1.</code>
-<!-- ??? --></p>
-<pre><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
-</code></pre>
-
 <p>Now it's time to get started. There are some differences with the TSDuck SRT implementation compared to other SRT applications. Typically you only specify a port without IP like <code>srt://:4900</code> and a SRT-listener on port 4900 will be created. If you specify an IP:port combination, SRT typically would act as SRT-caller to that IP:port (e.g. <code>srt://192.168.2.49:4900</code>)</p>
-<!-- Is there any plan to fix this in TSDuck ? -->
-
-<p>However, with TSDuck it seems you only can create a listener port and need to specify the adapter, which it should listen on. In this test the linux machine has two interfaces and the one with IP <code>192.168.2.3</code> was chosen to act as listening interface.</p>
-<pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt &quot;192.168.2.3:4900&quot; --transtype live --messageapi
+<p>With TSDuck, you can create a listener port and optionally specify the adapter, which it should listen on using <code>--listener port</code> or <code>--listener interface:port</code>. In this test the Linux machine has two interfaces and the one with IP <code>192.168.2.3</code> was chosen to act as listening interface.</p>
+<pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt --listener 192.168.2.3:4900 --transtype live --messageapi
 </code></pre>
 
 <p>It is also possible to just specify the port without a particular interface to use:</p>
-<pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt 4900 --transtype live --messageapi
+<pre><code>tsp -I file --infinite /home/n00b/Videos/StressTest_4KP25_h264.ts -P regulate -O srt --listener 4900 --transtype live --messageapi
 </code></pre>
 
-<p>A detail worth mentioning: <code>-O srt "IP:Port"</code> for <code>tsp</code> already specifies the usage if the srt protocol. So there is no need to add the <code>srt://</code> prefix to the IP or DNS-name. Adding it would actually result in an error.</p>
+<p>A detail worth mentioning: <code>-O srt --listener "[IP:]Port"</code> for <code>tsp</code> already specifies the usage of the SRT protocol. So there is no need to add the <code>srt://</code> prefix to the IP or DNS-name. Adding it would actually result in an error.</p>
 <p>Now another SRT application can connect to that SRT stream on <code>192.168.2.3:4900</code> provided by <code>tsp</code>, e.g., <a href="https://github.com/Haivision/srt/blob/master/docs/srt-live-transmit.md">srt-live-transmit</a> sample application to flip it back to MPEG-TS.</p>
 <pre><code>srt-live-transmit.exe srt://192.168.2.3:4900 udp://192.168.2.49:10002
 </code></pre>
 
 <p>Or VLC player: press <code>CTRL+N</code> to open a new network stream and type in URL <code>srt://192.168.2.3:4900</code> to connect to the stream in this example.</p>
 <h2 id="analyzing-incoming-srt-stream">Analyzing incoming SRT stream</h2>
-<p>Incoming SRT stream containing MPEG-TS one can also be analyzed. Only SRT caller mode is supported. The following example would connect to the SRT stream, which was sent out using <code>tsp</code> as described in the section above and perform an analysis for 10 seconds:</p>
-<pre><code>tsp -I srt 192.168.2.3:4900 --transtype live --messageapi -P until --seconds 10 -P analyze -O drop
-</code></pre>
-
-<p>This could also be done without specifying the interface to listen on (Please note, this would be still a caller to localhost, not a SRT listen port):</p>
-<pre><code>tsp -I srt 4900 --transtype live --messageapi -P until --seconds 10 -P analyze -O drop
+<p>Incoming SRT stream containing MPEG-TS one can also be analyzed. The following example would connect in caller mode to the SRT stream, which was sent out using <code>tsp</code> as described in the section above and perform an analysis for 10 seconds:</p>
+<pre><code>tsp -I srt --caller 192.168.2.3:4900 --transtype live --messageapi -P until --seconds 10 -P analyze -O drop
 </code></pre>
 
 <p>It would generate an output to <code>stdout</code> like this (shortened)</p>
@@ -1091,10 +1069,10 @@ tsp -I ... -P ... -O srt --rendezvous address:port
 |  Note 2: Unless specified otherwise, bitrates are based on 188 bytes/pkt    |
 ===============================================================================
 ...
-output was cut off here. for more details perform this on your stream or see
-TSDuck manual
-...
 </code></pre>
+
+<p>Output was cut off here. For more details perform this on your stream or see
+the <a href="https://tsduck.io/download/docs/tsduck.pdf">TSDuck user's guide</a>.</p>
                 
               
               
