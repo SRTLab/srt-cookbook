@@ -1,14 +1,14 @@
-# Using NetEm to emulate networks
+# Using NetEm to Emulate Networks
 
-[NetEm](https://www.linux.org/docs/man8/tc-netem.html) (Network Emulator) is an enhancement of the Linux traffic control facilities that allow to add delay, packet loss, duplication and more other characteristics to packets outgoing from a selected  network  interface.  NetEm  is  built using  the  existing  Quality  Of Service (QOS) and Differentiated Services (diffserv) facilities in the Linux kernel.
+[NetEm](https://www.linux.org/docs/man8/tc-netem.html) (Network  Emulator) is an enhancement of the Linux traffic control facilities that allow adding delay, packet loss, duplication and other characteristics to packets outgoing from a selected  network  interface.  NetEm  uses  the  existing  Quality  Of Service (QOS) and Differentiated Services (diffserv) facilities in the Linux kernel.
 
 It's a great tool to test SRT connections with network impairments like on real networks.
 
 ## Installation 
 
-The Linux traffic control (tc) and NetEm (netem) are available in most linux distributions and typically part of the `iproute2` package.
+Linux traffic control (tc) and NetEm (netem) are available in most Linux distributions, typically as part of the `iproute2` package.
 
-On Ubuntu systems can be installed by following command:
+On **Ubuntu** systems the `iproute2` package (including netem) can be installed using following command:
 
 ```
 sudo apt-get install iproute2
@@ -16,20 +16,20 @@ sudo apt-get install iproute2
 
 ## Installation on CentOS 8.2
 
-On CentOS 8 it's part of `iproute-tc`
+On **CentOS 8.2** the `iproute-tc` package (including netem) can be installed using following command:
 
 ```
 sudo yum install iproute-tc
 ```
 
-RHEL based systems like CentOS 8.2 might need an additional Kernel module, if the look-up of the name for `qdisc` fails, like in example shown below:
+**NOTE**: RHEL-based systems like CentOS 8.2 might need an additional kernel module in order to run netem. This would be indicated if, in running netem, the look-up of the name for `qdisc` fails, like in example shown below:
 
 ```
 sudo tc qdisc add dev enp7s0 root netem delay 10ms 10ms loss 2% rate 12mbit
 Error: Specified qdisc not found.
 ```
 
-The modules `kernel-modules-extra` and `kernel-debug-modules-extra` can be installed with following command:
+In such a case, install the modules `kernel-modules-extra` and `kernel-debug-modules-extra` with following command:
 
 ```
 sudo yum install kernel-debug-modules-extra kernel-modules-extra
@@ -37,84 +37,91 @@ sudo yum install kernel-debug-modules-extra kernel-modules-extra
 
 After installation a reboot is needed to activate the kernel modules.
 
-## Getting started with tc & netem
+## Getting Started with TC & NetEm
 
-Following examples use the interface `enp7s0`. Modify to match your network adapter (e.g. `eth0`).
+The following examples use the interface `enp7s0`. Modify to match your network adapter (e.g. `eth0`).
 
 To be able to change settings, root privileges are required.
 
-### add delay
+### Add Delay
 
-Please note: netem only adds delay to packets leaving the interface. If you want to simulate bi-directional delay two instances of tc netem - one on each end - are required. 
+**NOTE**: netem only adds delay to packets leaving the interface. If you want to simulate bi-directional delay two instances of tc netem - one on each end - are required. 
 
-following command adds 250 ms of delay to packets leaving interface `enp7s0`:
+The following command adds 250 ms of delay to packets leaving interface `enp7s0`:
 
 ```
 sudo tc qdisc add dev enp7s0 root netem delay 250ms
 ```
 
-### add delay with volatility
+### Add Delay with Volatility
 
-Following command sets the transmission of enp7s0 network interface to be delayed by 100ms + 10ms (any value between 90 and 110 ms)
+The following command sets the transmission of enp7s0 network interface to be delayed by 100ms + 10ms (any value between 90 and 110 ms):
 
 ```
 sudp tc qdisc add dev enp7s0 root netem delay 100ms 10ms
 ```
 
-The randomness of such fluctuations can be further specified:
-
-Following command sets network interface enp7s0 transmission to 100 ms, while about 30% of the packets are delayed by +10 ms.
+The volatility (randomness) of such fluctuations can be further  specified. The following command sets network interface enp7s0  transmission to 100 ms, while 30% of the packets selected at random are delayed by +10 ms:
 
 ```
 sudo tc qdisc add dev enp7s0 root netem delay 100ms 10ms 30%
 ```
 
-### adding packet loss
+### Adding Packet Loss
 
-Following command sets the enp7s0 network interface transmission to randomly drop 1% of the packets.
+The following command sets the enp7s0 network interface transmission to randomly drop 1% of the packets:
 
 ```
 sudo tc qdisc add dev enp7s0 root netem loss 1%
 ```
 
-### adding packet loss with success rate
+### Adding Packet Loss with Success Rate
 
 ```
 sudo tc qdisc add dev enp7s0 root netem loss 1% 30%
 ```
 
-### duplicating packets
+### Duplicating Packets
 
 ```
 sudo tc qdisc add dev enp7s0 root netem duplicate 1%
 ```
 
-### corrupted packets
+### Corrupted Packets
 
-When Linux kernel version is above 2.6.16 packets can also be damaged. Following command randomly damages 0.2% of the outgoing packets:
+For Linux kernel versions above 2.6.16, netem can also simulate damage to packets. The following command randomly damages 0.2% of the outgoing packets:
 
 ```
 sudo tc qdisc add dev enp7s0 root netem corrupt 0.2%
 ```
 
-### packet reordering
+### Packet Reordering
 
-Following command sets network interface enp7s0 transmission to sent out 25% Data package (with 50% relevance) immediately and delay all other packets by 10 ms.
+The following command sets network interface enp7s0 to send out 25% of data packets (with 50% relevance) immediately and delay all other packets by 10 ms.
 
 ```
 sudo tc qdisc add dev enp7s0 root netem delay 10ms reorder 25% 50%
 ```
 
-### view the configured network conditions
+### View the Configured Network Conditions
 
     sudo tc qdisc show dev enp7s0
 
-### stop network impairments
+### Stopping Network Impairments
 
-Please remember do disable the network impairments after tests are done:
+**IMPORTANT**: Please remember to disable the network impairments after tests are done by using the following command:
 
 ```
 sudo tc qdisc del dev enp7s0 root netem
 ```
 
-Above command will delete configuration named `root` like in above examples.
+The above command will delete the `root` configuration that was used in the examples above.
+
+## Further Reading
+
+These were just some basic examples to get started. TC & NetEm allow complex simulations and more information can be found at following links:
+
+http://ce.sc.edu/cyberinfra/workshops/Material/NTP/Lab%204.pdf
+
+https://www.cs.unm.edu/~crandall/netsfall13/TCtutorial.pdf
+
