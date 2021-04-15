@@ -45,7 +45,7 @@ To be able to change settings, root privileges are required.
 
 ### Add Delay
 
-**NOTE**: netem only adds delay to packets leaving the interface. If you want to simulate bi-directional delay two instances of tc netem - one on each end - are required. 
+**NOTE**: netem only adds delay to packets leaving the interface. If you want to simulate bi-directional delay, two instances of tc netem - one on each end - are required. 
 
 The following command adds 250 ms of delay to packets leaving interface `enp7s0`:
 
