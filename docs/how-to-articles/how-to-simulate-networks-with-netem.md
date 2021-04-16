@@ -1,6 +1,6 @@
 # Using NetEm to Emulate Networks
 
-[NetEm](https://www.linux.org/docs/man8/tc-netem.html) (Network  Emulator) is an enhancement of the Linux traffic control facilities that allow adding delay, packet loss, duplication and other characteristics to packets outgoing from a selected  network  interface.  NetEm  uses  the  existing  Quality  Of Service (QOS) and Differentiated Services (diffserv) facilities in the Linux kernel.
+[NetEm](https://www.linux.org/docs/man8/tc-netem.html) (Network  Emulator) is an enhancement of the Linux traffic control facilities that allow adding delay, packet loss, duplication and other characteristics to packets outgoing from a selected network interface.  NetEm uses the existing Quality Of Service (QOS) and Differentiated Services (diffserv) facilities in the Linux kernel.
 
 It's a great tool to test SRT connections with network impairments like on real networks.
 
@@ -14,7 +14,7 @@ On **Ubuntu** systems the `iproute2` package (including netem) can be installed 
 sudo apt-get install iproute2
 ```
 
-## Installation on CentOS 8.2
+### Installation on CentOS 8.2
 
 On **CentOS 8.2** the `iproute-tc` package (including netem) can be installed using following command:
 
@@ -43,7 +43,7 @@ The following examples use the interface `enp7s0`. Modify to match your network 
 
 To be able to change settings, root privileges are required.
 
-### Add Delay
+### Adding Delay
 
 **NOTE**: netem only adds delay to packets leaving the interface. If you want to simulate bi-directional delay, two instances of tc netem - one on each end - are required. 
 
@@ -53,7 +53,7 @@ The following command adds 250 ms of delay to packets leaving interface `enp7s0`
 sudo tc qdisc add dev enp7s0 root netem delay 250ms
 ```
 
-### Add Delay with Volatility
+### Adding Delay with Volatility
 
 The following command sets the transmission of enp7s0 network interface to be delayed by 100ms + 10ms (any value between 90 and 110 ms):
 
@@ -81,7 +81,7 @@ sudo tc qdisc add dev enp7s0 root netem loss 1%
 sudo tc qdisc add dev enp7s0 root netem loss 1% 30%
 ```
 
-### Duplicating Packets
+### Duplicated Packets
 
 ```
 sudo tc qdisc add dev enp7s0 root netem duplicate 1%
@@ -119,9 +119,9 @@ The above command will delete the `root` configuration that was used in the exam
 
 ## Further Reading
 
-These were just some basic examples to get started. TC & NetEm allow complex simulations and more information can be found at following links:
+These were just some basic examples to get started. TC & NetEm allow complex simulations and more information can be found in the documents listed below:
 
-http://ce.sc.edu/cyberinfra/workshops/Material/NTP/Lab%204.pdf
+- [Emulating WAN with NETEM II: Packet Loss, Duplication, Reordering, and Corruption](http://ce.sc.edu/cyberinfra/workshops/Material/NTP/Lab%204.pdf) (PDF by Universit of South Carolina)
 
-https://www.cs.unm.edu/~crandall/netsfall13/TCtutorial.pdf
+- [Traffic Control Manual](https://www.cs.unm.edu/~crandall/netsfall13/TCtutorial.pdf) (PDF by University of New Mexico)
 
