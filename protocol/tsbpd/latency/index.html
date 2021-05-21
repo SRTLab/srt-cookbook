@@ -582,18 +582,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../drift-management/" title="Drift Management" class="md-nav__link">
-      Drift Management
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -820,28 +808,34 @@ and a time drift <code>Drift</code>.</p>
 <h2 id="tsbpd-base-time">TSBPD Base Time</h2>
 <p><code>TsbPdTimeBase</code> is the base time difference between local clock of the receiver, and the clock used by the sender to timestamp packets being sent. A unit of measurement is microseconds.</p>
 <h3 id="initial-value">Initial value</h3>
-<p>The value of <code>TsbPdTimeBase</code>  is initialized at the time of the handshake request (<code>HSREQ</code> ) is received.<br />
+<p>The value of <code>TsbPdTimeBase</code>  is initialized at the time of the conclusion handshake is received as:<br />
 <code>TsbPdTimeBase = T_NOW - HSREQ_TIMESTAMP</code>.<br />
-This value should roughly correspond to the one-way delay (<strong>~RTT/2</strong>).</p>
+This value roughly corresponds to the one-way network delay (<strong>~RTT/2</strong>) between the two SRT peers.</p>
 <h3 id="tsbpd-wrapping-period">TSBPD Wrapping Period</h3>
 <p>The value of  <code>TsbPdTimeBase</code>  can be updated during the <strong>TSBPD</strong> wrapping period. The period starts <strong>30 seconds before</strong> reaching the maximum timestamp value of a packet (<code>CPacket::MAX_TIMESTAMP</code>), and ends whens the timestamp of the received packet is within [30; 60] seconds.<br />
 <code>CPacket::MAX_TIMESTAMP = 0xFFFFFFFF</code>, or maximum 32-bit unsigned integer value. The value is in microseconds, which corresponds to 1 hour 11 minutes and 35 seconds (01:11:35).<br />
 In other words, TSBPD time wrapping happens every 01:11:35.</p>
-<p>During this wrapping period, a packet may have a timestamp close to <code>CPacket::MAX_TIMESTAMP</code>, as well as close to <code>0</code>. Both cases are handled. In the first case, the current value of <code>TsbPdTimeBase</code> is used. In the seconds case, <code>TsbPdTimeBase + CPacket::MAX_TIMESTAMP + 1</code> is used to calculate TSBPD time of a packet.</p>
-<p>The wrapping period ends when the timestamp of the received packet is within the interval [30; 60] seconds. The updated value will be <code>TsbPdTimeBase += CPacket::MAX_TIMESTAMP + 1</code>.</p>
+<p>During the wrapping period, a packet may have a timestamp either in [<code>CPacket::MAX_TIMESTAMP - 30s</code>; <code>CPacket::MAX_TIMESTAMP</code>] or in [0; 30s]. In the first case, the current value of <code>TsbPdTimeBase</code> is used. In the seconds case, <code>TsbPdTimeBase + CPacket::MAX_TIMESTAMP + 1</code> is used to calculate TSBPD time for the packet.</p>
+<p>The wrapping period ends when the timestamp of the received packet is within the interval [30s; 60s]. The updated value will be <code>TsbPdTimeBase += CPacket::MAX_TIMESTAMP + 1</code>.</p>
 <h3 id="time-drift">Time Drift</h3>
 <p>The value of  <code>TsbPdTimeBase</code>  can be updated by the DriftTracer.</p>
 <h2 id="time-drift-sample">Time Drift Sample</h2>
 <p>Upon receipt of an <code>ACKACK</code> packet, the timestamp of this control packet is used as a sample for drift tracing. <code>ACKACK</code> timestamp is expected to be half the round-trip time ago (<strong>RTT/2</strong>). The drift time <strong>DRIFT</strong> is calculated from the current time <strong>T_NOW</strong>; the TSBPD base time <code>TsbPdTimeBase</code>; and the timestamp <strong>ACKACK_TIMESTAMP</strong> of the received <code>ACKACK</code> packet.</p>
-<p><code>DRIFT = T_NOW - (TsbPdTimeBase + ACKACK_TIMESTAMP)</code></p>
-<p>The base time should stay in sync with <code>T_NOW - T_SENDER</code> , and should roughly correspond to <strong>~RTT/2</strong>. The value of <code>ACKACK_TIMESTAMP</code> should represent <code>T_SENDER</code>, and be <strong>~RTT/2</strong> in the past.<br />
+<p><code>DRIFT = T_NOW - (TsbPdTimeBase + ACKACK_TIMESTAMP) - ΔRTT</code>,  </p>
+<p>where <code>ΔRTT = (RTTSample - RTT0) / 2</code> or the difference between the current RTT sample calculated from the ACK-ACKACK pair, and the the first RTT sample <code>RTT0</code>. The motivation for <code>ΔRTT</code> is to compensate a variation in the network delay from the clock drift estimate.</p>
+<div class="admonition note">
+<p class="admonition-title">Handshake-based RTT Needed</p>
+<p>As of SRT v1.4.4 (<a href="https://github.com/Haivision/srt/pull/1965">PR 1965</a>) <code>RTT0</code> is taken from the very first ACK-ACKACK pair.
+Assuming it is the best approximation of the actual <code>RTT0</code> during the handshake. However, the best estimate of the network delay during the handshake would be to estimate RTT based on the exchange of handshakes.</p>
+</div>
+<p>The base time should stay in sync with <code>T_NOW - T_SENDER</code> , and should roughly correspond to the network delay (<strong>~RTT/2</strong>). The value of <code>ACKACK_TIMESTAMP</code> should represent <code>T_SENDER</code>, and be <strong>~RTT/2</strong> in the past.<br />
 Therefore, the above equation can be considered as <br />
 <code>DRIFT = T_NOW - (T_NOW - T_SENDER + T_SENDER) -&gt; 0</code> if the link latency remains constant.</p>
 <p>Assuming that the link latency is constant (RTT=const), the only cause of the drift fluctuations should be clock inaccuracy.</p>
-<div class="admonition error">
+<div class="admonition note">
 <p class="admonition-title">Drift Tracer should consider RTT</p>
-<p>Time drift sample does not take RTT fluctuations into account.
-Instead an increase of RTT will be treated as a time drift. See <a href="https://github.com/Haivision/srt/issues/753">issue 753</a>.</p>
+<p>Time drift sample in SRT versions before v1.4.4 does not take RTT fluctuations into account.
+Instead an increase of RTT will be treated as a time drift. See <a href="https://github.com/Haivision/srt/pull/1965">PR 1965</a>.</p>
 </div>
 <h2 id="drift-tracing-and-adjustment">Drift Tracing and Adjustment</h2>
 <p>Drift tracing is based on accumulating the sum of drift samples.<br />
@@ -856,7 +850,7 @@ The values of <strong>DriftSpan</strong> and <strong>DriftSum</strong> are reset
 <p>If the absolute value of the Drift exceeds <strong>MAX_DRIFT</strong> (<code>|Drift| &gt; MAX_DRIFT</code>), the remainder goes to <strong>OverDrift</strong> value.<br />
 The value of <strong>OverDrift</strong> is used to update the <strong>TsbPdTimeBase</strong>.</p>
 <p>In pseudo-code it looks like this:</p>
-<pre><code class="text">bool update(int64_t driftval)
+<pre><code class="c++">bool update(int64_t driftval)
 {
     DriftSum += driftval;
     ++DriftSpan;
@@ -888,7 +882,7 @@ The value of <strong>OverDrift</strong> is used to update the <strong>TsbPdTimeB
 </div>
 <h2 id="class-drifttracer">Class DriftTracer</h2>
 <p>The <strong>DriftTracer</strong> class has the following prototype.</p>
-<pre><code class="text">template&lt;unsigned MAX_SPAN, int MAX_DRIFT, bool CLEAR_ON_UPDATE = true&gt;
+<pre><code class="c++">template&lt;unsigned MAX_SPAN, int MAX_DRIFT, bool CLEAR_ON_UPDATE = true&gt;
 class DriftTracer
 {
 public:
@@ -919,7 +913,7 @@ public:
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../drift-management/" title="Drift Management" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../" title="TSBPD" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -928,7 +922,7 @@ public:
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Drift Management
+                TSBPD
               </span>
             </div>
           </a>
