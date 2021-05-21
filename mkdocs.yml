@@ -1,5 +1,8 @@
 site_name: SRT CookBook
 
+repo_url: https://github.com/SRTLab/srt-cookbook/
+edit_uri: blob/master/docs/
+
 theme:
   name: 'material'
   language: 'en'
