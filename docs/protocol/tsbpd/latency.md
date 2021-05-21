@@ -24,9 +24,9 @@ and a time drift `Drift`.
 
 ### Initial value
 
-The value of `TsbPdTimeBase`  is initialized at the time of the handshake request \(`HSREQ` \) is received.  
+The value of `TsbPdTimeBase`  is initialized at the time of the conclusion handshake is received as:  
 `TsbPdTimeBase = T_NOW - HSREQ_TIMESTAMP`.  
-This value should roughly correspond to the one-way delay \(**~RTT/2**\).
+This value roughly corresponds to the one-way network delay \(**~RTT/2**\) between the two SRT peers.
 
 ### TSBPD Wrapping Period
 
@@ -34,9 +34,9 @@ The value of  `TsbPdTimeBase`  can be updated during the **TSBPD** wrapping peri
 `CPacket::MAX_TIMESTAMP = 0xFFFFFFFF`, or maximum 32-bit unsigned integer value. The value is in microseconds, which corresponds to 1 hour 11 minutes and 35 seconds \(01:11:35\).  
 In other words, TSBPD time wrapping happens every 01:11:35.
 
-During this wrapping period, a packet may have a timestamp close to `CPacket::MAX_TIMESTAMP`, as well as close to `0`. Both cases are handled. In the first case, the current value of `TsbPdTimeBase` is used. In the seconds case, `TsbPdTimeBase + CPacket::MAX_TIMESTAMP + 1` is used to calculate TSBPD time of a packet.
+During the wrapping period, a packet may have a timestamp either in \[`CPacket::MAX_TIMESTAMP - 30s`; `CPacket::MAX_TIMESTAMP`\] or in \[0; 30s\]. In the first case, the current value of `TsbPdTimeBase` is used. In the seconds case, `TsbPdTimeBase + CPacket::MAX_TIMESTAMP + 1` is used to calculate TSBPD time for the packet.
 
-The wrapping period ends when the timestamp of the received packet is within the interval \[30; 60\] seconds. The updated value will be `TsbPdTimeBase += CPacket::MAX_TIMESTAMP + 1`.
+The wrapping period ends when the timestamp of the received packet is within the interval \[30s; 60s\]. The updated value will be `TsbPdTimeBase += CPacket::MAX_TIMESTAMP + 1`.
 
 ### Time Drift
 
@@ -46,18 +46,26 @@ The value of  `TsbPdTimeBase`  can be updated by the DriftTracer.
 
 Upon receipt of an `ACKACK` packet, the timestamp of this control packet is used as a sample for drift tracing. `ACKACK` timestamp is expected to be half the round-trip time ago \(**RTT/2**\). The drift time **DRIFT** is calculated from the current time **T\_NOW**; the TSBPD base time `TsbPdTimeBase`; and the timestamp **ACKACK\_TIMESTAMP** of the received `ACKACK` packet.
 
-`DRIFT = T_NOW - (TsbPdTimeBase + ACKACK_TIMESTAMP)`
+`DRIFT = T_NOW - (TsbPdTimeBase + ACKACK_TIMESTAMP) - ΔRTT`,  
 
-The base time should stay in sync with `T_NOW - T_SENDER` , and should roughly correspond to **~RTT/2**. The value of `ACKACK_TIMESTAMP` should represent `T_SENDER`, and be **~RTT/2** in the past.  
+where `ΔRTT = (RTTSample - RTT0) / 2` or the difference between the current RTT sample calculated from the ACK-ACKACK pair, and the the first RTT sample `RTT0`. The motivation for `ΔRTT` is to compensate a variation in the network delay from the clock drift estimate.
+
+!!! Note "Handshake-based RTT Needed"
+
+    As of SRT v1.4.4 ([PR 1965](https://github.com/Haivision/srt/pull/1965)) `RTT0` is taken from the very first ACK-ACKACK pair.
+    Assuming it is the best approximation of the actual `RTT0` during the handshake. However, the best estimate of the network delay during the handshake would be to estimate RTT based on the exchange of handshakes.
+
+
+The base time should stay in sync with `T_NOW - T_SENDER` , and should roughly correspond to the network delay (**~RTT/2**). The value of `ACKACK_TIMESTAMP` should represent `T_SENDER`, and be **~RTT/2** in the past.  
 Therefore, the above equation can be considered as   
 `DRIFT = T_NOW - (T_NOW - T_SENDER + T_SENDER) -> 0` if the link latency remains constant.
 
 Assuming that the link latency is constant \(RTT=const\), the only cause of the drift fluctuations should be clock inaccuracy.
 
-!!! Error "Drift Tracer should consider RTT"
+!!! Note "Drift Tracer should consider RTT"
 
-    Time drift sample does not take RTT fluctuations into account.
-    Instead an increase of RTT will be treated as a time drift. See [issue 753](https://github.com/Haivision/srt/issues/753).
+    Time drift sample in SRT versions before v1.4.4 does not take RTT fluctuations into account.
+    Instead an increase of RTT will be treated as a time drift. See [PR 1965](https://github.com/Haivision/srt/pull/1965).
 
 ## Drift Tracing and Adjustment
 
@@ -77,7 +85,7 @@ The value of **OverDrift** is used to update the **TsbPdTimeBase**.
 
 In pseudo-code it looks like this:
 
-```text
+```c++
 bool update(int64_t driftval)
 {
 	DriftSum += driftval;
@@ -113,7 +121,7 @@ bool update(int64_t driftval)
 
 The **DriftTracer** class has the following prototype.
 
-```text
+```c++
 template<unsigned MAX_SPAN, int MAX_DRIFT, bool CLEAR_ON_UPDATE = true>
 class DriftTracer
 {
