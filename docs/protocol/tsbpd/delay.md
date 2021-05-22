@@ -52,33 +52,33 @@
 
 <ion-grid>
     <ion-row>
-        <ion-col>
-            Sender
+        <ion-col size="2">
+            </br><b>Peer A:</b>
         </ion-col>
-        <ion-col>
-            Receiver
-        </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-col>
+        <ion-col size="auto">
             <ion-item>
                 <ion-label position="stacked">SRTO_RCVLATENCY</ion-label>
                 <ion-input id="FinalRcvLatencyA" type="number" autocorrect="on"></ion-input>
             </ion-item>
         </ion-col>
-        <ion-col>
+        <ion-col size="auto">
             <ion-item>
                 <ion-label position="stacked">SRTO_PEERLATENCY</ion-label>
                 <ion-input id="FinalPeerLatencyA" type="number"></ion-input>
             </ion-item>
         </ion-col>
-        <ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="2">
+            </br><b>Peer B:</b>
+        </ion-col>
+        <ion-col size="auto">
             <ion-item>
                 <ion-label position="stacked">SRTO_RCVLATENCY</ion-label>
                 <ion-input id="FinalRcvLatencyB" type="number"></ion-input>
             </ion-item>
         </ion-col>
-        <ion-col>
+        <ion-col size="auto">
             <ion-item>
                 <ion-label position="stacked">SRTO_PEERLATENCY</ion-label>
                 <ion-input id="FinalPeerLatencyB" type="number"></ion-input>
@@ -121,7 +121,7 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         resetDefault();
-    }, false);
+    }, true);
     ResetDefaultBtn.addEventListener("click", resetDefault);
 
     RcvLatencyA.addEventListener("ionChange", updateRcvAPeerB);
@@ -132,3 +132,4 @@
 
 
 some text goes here
+
