@@ -27,6 +27,12 @@ The same applies relative to **Peer B**. `SRTO_RCVLATENCY` is the latency applie
 
 ![](latency-opts.png)
 
+The negotiated latency is the maximum of `SRTO_RCVLATENCY` and `SRTO_PEERLATENCY` pair. </br>
+**Peer A** `SRTO_RCVLATENCY_NEGOTIATED = max(PEER_A_SRTO_RCVLATENCY; PEER_B_SRTO_PEERLATENCY)`.</br>
+**Peer A** `SRTO_PEERLATENCY_NEGOTIATED = max(PEER_A_SRTO_PEERLATENCY; PEER_B_SRTO_RCVLATENCY)`.</br>
+**Peer B** `SRTO_RCVLATENCY_NEGOTIATED = max(PEER_B_SRTO_RCVLATENCY; PEER_A_SRTO_PEERLATENCY)`.</br>
+**Peer B** `SRTO_PEERLATENCY_NEGOTIATED = max(PEER_B_SRTO_PEERLATENCY; PEER_A_SRTO_RCVLATENCY)`.
+
 ## Configured Latency (Before Connection)
 
 Set SRT socket options before the connection, and see the negotiated latency after connection is established.
@@ -70,9 +76,7 @@ Set SRT socket options before the connection, and see the negotiated latency aft
 
 <button class="btn btn-primary mb-3" id="ResetDefaultBtn">Reset to Defaults</button>
 
-
 ## Negotiated Latency (After Connection)
-
 
 <div class="container">
     <div class="row">
@@ -147,4 +151,6 @@ Set SRT socket options before the connection, and see the negotiated latency aft
     RcvLatencyB.addEventListener("input", updateRcvBPeerA);
     PeerLatencyA.addEventListener("input", updateRcvBPeerA);
 </script>
+
+
 
