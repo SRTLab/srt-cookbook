@@ -8,3 +8,5 @@ TSBPD stands for **Time-Stamp Based Packet Delivery**. The mechanism is describe
 
 An in-depth overview of the latency in SRT is given in the [SRT Latency](./latency).
 
+An overview of SRT latency negotiation and the negotiated latency calculator can be found on the [Latency Negotiation](./latency-negotiation) page.
+
