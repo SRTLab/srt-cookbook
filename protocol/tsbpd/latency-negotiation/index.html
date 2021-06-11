@@ -778,6 +778,11 @@ can be used to configure both latencies at once.</p>
 <p><code>SRTO_PEERLATENCY</code> is the receiver buffering latency <code>SRTO_RCVLATENCY</code> of the peer.</p>
 </div>
 <p><img alt="" src="../latency-opts.png" /></p>
+<p>The negotiated latency is the maximum of <code>SRTO_RCVLATENCY</code> and <code>SRTO_PEERLATENCY</code> pair. </br>
+<strong>Peer A</strong> <code>SRTO_RCVLATENCY_NEGOTIATED = max(PEER_A_SRTO_RCVLATENCY; PEER_B_SRTO_PEERLATENCY)</code>.</br>
+<strong>Peer A</strong> <code>SRTO_PEERLATENCY_NEGOTIATED = max(PEER_A_SRTO_PEERLATENCY; PEER_B_SRTO_RCVLATENCY)</code>.</br>
+<strong>Peer B</strong> <code>SRTO_RCVLATENCY_NEGOTIATED = max(PEER_B_SRTO_RCVLATENCY; PEER_A_SRTO_PEERLATENCY)</code>.</br>
+<strong>Peer B</strong> <code>SRTO_PEERLATENCY_NEGOTIATED = max(PEER_B_SRTO_PEERLATENCY; PEER_A_SRTO_RCVLATENCY)</code>.</p>
 <h2 id="configured-latency-before-connection">Configured Latency (Before Connection)</h2>
 <p>Set SRT socket options before the connection, and see the negotiated latency after connection is established.</p>
 <div class="container">
