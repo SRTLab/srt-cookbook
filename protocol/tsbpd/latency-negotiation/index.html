@@ -10,8 +10,6 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
-        <meta name="description" content="Time-Stamp Based Packet Delivery">
-      
       
       
       
@@ -33,21 +31,21 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
-        <title>TSBPD - SRT CookBook</title>
+        <title>Latency Negotiation - SRT CookBook</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.30686662.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
@@ -56,7 +54,7 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
     
     
     
@@ -79,7 +77,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#tsbpd" tabindex="1" class="md-skip">
+      <a href="#latency-negotiation" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -88,7 +86,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="SRT CookBook" class="md-header-nav__button md-logo">
+        <a href="../../.." title="SRT CookBook" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -105,7 +103,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                TSBPD
+                Latency Negotiation
               
             </span>
           
@@ -180,7 +178,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../.." title="SRT CookBook" class="md-nav__button md-logo">
+    <a href="../../.." title="SRT CookBook" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -216,7 +214,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Introduction" class="md-nav__link">
+    <a href="../../.." title="Introduction" class="md-nav__link">
       Introduction
     </a>
   </li>
@@ -228,7 +226,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../faq/" title="FAQ" class="md-nav__link">
+    <a href="../../../faq/" title="FAQ" class="md-nav__link">
       FAQ
     </a>
   </li>
@@ -259,7 +257,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../apps/" title="Projects and Applications with SRT support" class="md-nav__link">
+    <a href="../../../apps/" title="Projects and Applications with SRT support" class="md-nav__link">
       Projects and Applications with SRT support
     </a>
   </li>
@@ -271,7 +269,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../apps/ffmpeg/" title="FFmpeg" class="md-nav__link">
+    <a href="../../../apps/ffmpeg/" title="FFmpeg" class="md-nav__link">
       FFmpeg
     </a>
   </li>
@@ -283,7 +281,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../apps/gstreamer-plugin/" title="GStreamer" class="md-nav__link">
+    <a href="../../../apps/gstreamer-plugin/" title="GStreamer" class="md-nav__link">
       GStreamer
     </a>
   </li>
@@ -295,7 +293,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../apps/obs-studio/" title="OBS Studio" class="md-nav__link">
+    <a href="../../../apps/obs-studio/" title="OBS Studio" class="md-nav__link">
       OBS Studio
     </a>
   </li>
@@ -307,7 +305,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../apps/tsduck/" title="TSDuck" class="md-nav__link">
+    <a href="../../../apps/tsduck/" title="TSDuck" class="md-nav__link">
       TSDuck
     </a>
   </li>
@@ -319,7 +317,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../apps/vlc-media-player/" title="VLC Media Player" class="md-nav__link">
+    <a href="../../../apps/vlc-media-player/" title="VLC Media Player" class="md-nav__link">
       VLC Media Player
     </a>
   </li>
@@ -331,7 +329,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../apps/wireshark/" title="Wireshark" class="md-nav__link">
+    <a href="../../../apps/wireshark/" title="Wireshark" class="md-nav__link">
       Wireshark
     </a>
   </li>
@@ -367,7 +365,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../getting-started/build-on-windows/" title="Build on Windows" class="md-nav__link">
+    <a href="../../../getting-started/build-on-windows/" title="Build on Windows" class="md-nav__link">
       Build on Windows
     </a>
   </li>
@@ -379,7 +377,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../getting-started/vcpkg-library-manager/" title="Vcpkg Library Manager" class="md-nav__link">
+    <a href="../../../getting-started/vcpkg-library-manager/" title="Vcpkg Library Manager" class="md-nav__link">
       Vcpkg Library Manager
     </a>
   </li>
@@ -415,7 +413,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../how-to-articles/how-to-setup-Azure-VM/" title="How to Setup Virtual Machine in Azure" class="md-nav__link">
+    <a href="../../../how-to-articles/how-to-setup-Azure-VM/" title="How to Setup Virtual Machine in Azure" class="md-nav__link">
       How to Setup Virtual Machine in Azure
     </a>
   </li>
@@ -427,7 +425,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../how-to-articles/how-to-setup-wireshark-for-srt-traffic-analysis/" title="Using TShark & Wireshark to analyse SRT traffic" class="md-nav__link">
+    <a href="../../../how-to-articles/how-to-setup-wireshark-for-srt-traffic-analysis/" title="Using TShark & Wireshark to analyse SRT traffic" class="md-nav__link">
       Using TShark & Wireshark to analyse SRT traffic
     </a>
   </li>
@@ -439,7 +437,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../how-to-articles/how-to-simulate-networks-with-netem/" title="Using NetEm to Emulate Networks" class="md-nav__link">
+    <a href="../../../how-to-articles/how-to-simulate-networks-with-netem/" title="Using NetEm to Emulate Networks" class="md-nav__link">
       Using NetEm to Emulate Networks
     </a>
   </li>
@@ -451,7 +449,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../how-to-articles/how-to-work-with-ssh-keys/" title="How to Work with SSH Keys" class="md-nav__link">
+    <a href="../../../how-to-articles/how-to-work-with-ssh-keys/" title="How to Work with SSH Keys" class="md-nav__link">
       How to Work with SSH Keys
     </a>
   </li>
@@ -489,7 +487,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../" title="The Protocol" class="md-nav__link">
+    <a href="../../" title="The Protocol" class="md-nav__link">
       The Protocol
     </a>
   </li>
@@ -501,7 +499,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../bandwidth-estimation/" title="Bandwidth Estimation" class="md-nav__link">
+    <a href="../../bandwidth-estimation/" title="Bandwidth Estimation" class="md-nav__link">
       Bandwidth Estimation
     </a>
   </li>
@@ -513,7 +511,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../events-and-timers/" title="Control Events and Timers" class="md-nav__link">
+    <a href="../../events-and-timers/" title="Control Events and Timers" class="md-nav__link">
       Control Events and Timers
     </a>
   </li>
@@ -525,7 +523,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../overhead/" title="SRT Protocol Overhead" class="md-nav__link">
+    <a href="../../overhead/" title="SRT Protocol Overhead" class="md-nav__link">
       SRT Protocol Overhead
     </a>
   </li>
@@ -537,7 +535,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../threads/" title="Threads" class="md-nav__link">
+    <a href="../../threads/" title="Threads" class="md-nav__link">
       Threads
     </a>
   </li>
@@ -568,7 +566,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../congestion-control/" title="Congestion Control" class="md-nav__link">
+    <a href="../../congestion-control/" title="Congestion Control" class="md-nav__link">
       Congestion Control
     </a>
   </li>
@@ -580,7 +578,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../congestion-control/file-cc/" title="File Congestion Control" class="md-nav__link">
+    <a href="../../congestion-control/file-cc/" title="File Congestion Control" class="md-nav__link">
       File Congestion Control
     </a>
   </li>
@@ -616,6 +614,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../" title="TSBPD" class="md-nav__link">
+      TSBPD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -626,9 +636,45 @@
       
     
     
-    <a href="./" title="TSBPD" class="md-nav__link md-nav__link--active">
-      TSBPD
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Latency Negotiation
+      </label>
+    
+    <a href="./" title="Latency Negotiation" class="md-nav__link md-nav__link--active">
+      Latency Negotiation
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configured-latency-before-connection" class="md-nav__link">
+    Configured Latency (Before Connection)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#negotiated-latency-after-connection" class="md-nav__link">
+    Negotiated Latency (After Connection)
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -639,19 +685,7 @@
 
 
   <li class="md-nav__item">
-    <a href="latency-negotiation/" title="Latency Negotiation" class="md-nav__link">
-      Latency Negotiation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="latency/" title="SRT Latency" class="md-nav__link">
+    <a href="../latency/" title="SRT Latency" class="md-nav__link">
       SRT Latency
     </a>
   </li>
@@ -684,6 +718,29 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configured-latency-before-connection" class="md-nav__link">
+    Configured Latency (Before Connection)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#negotiated-latency-after-connection" class="md-nav__link">
+    Negotiated Latency (After Connection)
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -694,12 +751,147 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/SRTLab/srt-cookbook/blob/master/docs/protocol/tsbpd/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/SRTLab/srt-cookbook/blob/master/docs/protocol/tsbpd/latency-negotiation.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="tsbpd">TSBPD</h1>
-<p>TSBPD stands for <strong>Time-Stamp Based Packet Delivery</strong>. The mechanism is described in <a href="https://datatracker.ietf.org/doc/html/draft-sharabayko-srt-00#section-4.5">SRT RFC</a>.</p>
-<p>An in-depth overview of the latency in SRT is given in the <a href="./latency">SRT Latency</a>.</p>
+                <h1 id="latency-negotiation">Latency Negotiation</h1>
+<p><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script></p>
+<p>SRT connection provides a bidirectional transmission channel. Therefore, there are two buffering latencies (delays): one in each direction.
+SRT allows to configure both latencies independently using
+<a href="https://github.com/Haivision/srt/blob/v1.4.3/docs/API/API-socket-options.md#SRTO_RCVLATENCY"><code>SRTO_RCVLATENCY</code></a>
+and <a href="https://github.com/Haivision/srt/blob/v1.4.3/docs/API/API-socket-options.md#SRTO_PEERLATENCY"><code>SRTO_PEERLATENCY</code></a>
+socket options. For simplicity, <a href="https://github.com/Haivision/srt/blob/v1.4.3/docs/API/API-socket-options.md#SRTO_LATENCY"><code>SRTO_LATENCY</code></a>
+can be used to configure both latencies at once.</p>
+<div class="admonition note">
+<p class="admonition-title">Live Streaming Configuration Only</p>
+<p>Please note that buffering delay is applied only in <a href="https://datatracker.ietf.org/doc/html/draft-sharabayko-srt-00#section-7.1">Live Streaming configuration</a> whith
+<a href="https://datatracker.ietf.org/doc/html/draft-sharabayko-srt-00#section-4.5">TSBPD</a> enabled.</p>
+</div>
+<p>Let's assume <strong>Peer A</strong> is the local side on which those socket options are set. <strong>Peer B</strong> is the remote peer with which <strong>Peer A</strong> is establising a connection.
+<code>SRTO_RCVLATENCY</code> is the buffering delay of the <strong>Peer A</strong> for all the payload it receives.
+<code>SRTO_PEERLATENCY</code> is the buffering delay of the remote <strong>Peer B</strong> for all the payload it will receive from <strong>Peer A</strong>.
+<strong>Peer A</strong> uses this delay when sending the payload to decide if it still makes sense to re-transmit a lost packet (see the <a href="https://datatracker.ietf.org/doc/html/draft-sharabayko-srt-00#section-4.6">TL Packet Drop</a> Section of SRT RFC).</p>
+<p>The same applies relative to <strong>Peer B</strong>. <code>SRTO_RCVLATENCY</code> is the latency applied on the incoming payload, <code>SRTO_PEERLATENCY</code> is the latency in the direction of sending towards <strong>Peer A</strong>.</p>
+<div class="admonition info">
+<p class="admonition-title">Buffering Delay of the Peer</p>
+<p><code>SRTO_PEERLATENCY</code> is the receiver buffering latency <code>SRTO_RCVLATENCY</code> of the peer.</p>
+</div>
+<p><img alt="" src="../latency-opts.png" /></p>
+<h2 id="configured-latency-before-connection">Configured Latency (Before Connection)</h2>
+<p>Set SRT socket options before the connection, and see the negotiated latency after connection is established.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            <b>Peer A:</b>
+        </div>
+        <div class="col-md">
+            <div class="form-floating">
+                <input type="number" id="RcvLatencyA" class="form-control">
+                <label for="RcvLatencyA">SRTO_RCVLATENCY</label>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-floating">
+                <input type="number" id="PeerLatencyA" class="form-control">
+                <label for="PeerLatencyA">SRTO_PEERLATENCY</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <b>Peer B:</b>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input type="number" id="RcvLatencyB" class="form-control">
+                <label for="RcvLatencyB">SRTO_RCVLATENCY</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input type="number" id="PeerLatencyB" class="form-control">
+                <label for="PeerLatencyB">SRTO_PEERLATENCY</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p><button class="btn btn-primary mb-3" id="ResetDefaultBtn">Reset to Defaults</button></p>
+<h2 id="negotiated-latency-after-connection">Negotiated Latency (After Connection)</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            <b>Peer A:</b>
+        </div>
+        <div class="col">
+            <div class="form-floating sm-2">
+                <input type="number" id="FinalRcvLatencyA" class="form-control sm-2" readonly>
+                <label for="FinalRcvLatencyA">SRTO_RCVLATENCY</label>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                <input type="number" id="FinalPeerLatencyA" class="form-control" readonly>
+                <label for="FinalPeerLatencyA">SRTO_PEERLATENCY</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <b>Peer B:</b>
+        </div>
+        <div class="col">
+            <input type="number" id="FinalRcvLatencyB" class="form-control" readonly>
+        </div>
+        <div class="col">
+            <input type="number" id="FinalPeerLatencyB" class="form-control" readonly>
+        </div>
+    </div>
+</div>
+
+<script>
+    var RcvLatencyA = document.getElementById("RcvLatencyA");
+    var PeerLatencyA = document.getElementById("PeerLatencyA");
+    var RcvLatencyB = document.getElementById("RcvLatencyB");
+    var PeerLatencyB = document.getElementById("PeerLatencyB");
+    var FinalRcvLatencyA = document.getElementById("FinalRcvLatencyA");
+    var FinalPeerLatencyA = document.getElementById("FinalPeerLatencyA");
+    var FinalRcvLatencyB = document.getElementById("FinalRcvLatencyB");
+    var FinalPeerLatencyB = document.getElementById("FinalPeerLatencyB");
+    var ResetDefaultBtn = document.getElementById("ResetDefaultBtn");
+
+    updateRcvAPeerB = function () {
+        let val = Math.max(RcvLatencyA.value, PeerLatencyB.value);
+        FinalRcvLatencyA.value = val;
+        FinalPeerLatencyB.value = val;
+    };
+
+    updateRcvBPeerA = function () {
+        let val = Math.max(RcvLatencyB.value, PeerLatencyA.value);
+        FinalRcvLatencyB.value = val;
+        FinalPeerLatencyA.value = val;
+    };
+
+    resetDefault = function() {
+        RcvLatencyA.value = 120;
+        RcvLatencyB.value = 120;
+        PeerLatencyA.value = 0;
+        PeerLatencyB.value = 0;
+        updateRcvAPeerB();
+        updateRcvBPeerA();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        resetDefault();
+    }, true);
+    ResetDefaultBtn.addEventListener("click", resetDefault);
+
+    RcvLatencyA.addEventListener("input", updateRcvAPeerB);
+    PeerLatencyB.addEventListener("input", updateRcvAPeerB);
+    RcvLatencyB.addEventListener("input", updateRcvBPeerA);
+    PeerLatencyA.addEventListener("input", updateRcvBPeerA);
+</script>
                 
                   
                 
@@ -720,7 +912,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../congestion-control/file-cc/" title="File Congestion Control" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../" title="TSBPD" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -729,19 +921,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                File Congestion Control
+                TSBPD
               </span>
             </div>
           </a>
         
         
-          <a href="latency-negotiation/" title="Latency Negotiation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../latency/" title="SRT Latency" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Latency Negotiation
+                SRT Latency
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -769,9 +961,9 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../../../assets/javascripts/application.ac79c3b0.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
       
     
   </body>
