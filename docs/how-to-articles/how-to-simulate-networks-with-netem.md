@@ -117,11 +117,53 @@ sudo tc qdisc del dev enp7s0 root netem
 
 The above command will delete the `root` configuration that was used in the examples above.
 
+## NetEm Wrapper
+
+We provide a [netem wrapper](https://github.com/SRTLab/netem-wrapper) written in Python to concatenate network conditions by means of simple configuration files. 
+
+Here is an example of a config file that can be created with it:
+
+```
+{
+  "name": "example",
+  "interface": "wlp3s0",
+  "events": {
+    "1": {
+      "duration": 5000,
+      "rules": [
+        "clear"
+      ]
+    },
+    "2": {
+      "duration": 15000,
+      "rules": [
+        "delay 30ms 10ms distribution normal",
+        "loss 0.1% 0.25%"
+      ]
+    },
+    "3": {
+      "duration": 10000,
+      "rules": [
+        "delay 50ms"
+      ]
+    },
+    "4": {
+      "duration": 5000,
+      "rules": [
+        "clear"
+      ]
+    }
+  }
+}
+```
+
+The wrapper has an optional parameter that outputs a json file with the timestamps of when the conditions were applied. It can be useful in case the time of changing the network impairments is required for further analysis.
+
 ## Further Reading
 
 These were just some basic examples to get started. TC & NetEm allow complex simulations and more information can be found in the documents listed below:
 
-- [Emulating WAN with NETEM II: Packet Loss, Duplication, Reordering, and Corruption](http://ce.sc.edu/cyberinfra/workshops/Material/NTP/Lab%204.pdf) (PDF by Universit of South Carolina)
+- [Emulating WAN with NETEM II: Packet Loss, Duplication, Reordering, and Corruption](http://ce.sc.edu/cyberinfra/workshops/Material/NTP/Lab%204.pdf) (PDF by University of South Carolina)
 
 - [Traffic Control Manual](https://www.cs.unm.edu/~crandall/netsfall13/TCtutorial.pdf) (PDF by University of New Mexico)
 
