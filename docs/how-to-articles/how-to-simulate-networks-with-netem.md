@@ -119,7 +119,7 @@ The above command will delete the `root` configuration that was used in the exam
 
 ## NetEm Wrapper
 
-We provide a netem wrapper written in python to concatenate network conditions by means of simple configuration files. This wrapper is available in [SRTLab/netem-wrapper](https://github.com/SRTLab/netem-wrapper).
+We provide a [netem wrapper](https://github.com/SRTLab/netem-wrapper) written in Python to concatenate network conditions by means of simple configuration files. 
 
 Here is an example of a config file that can be created with it:
 
@@ -157,13 +157,13 @@ Here is an example of a config file that can be created with it:
 }
 ```
 
-The wrapper has an optional parameter that outputs a json file with the timestamps of when the conditions were applied, in case it wants to be used for later analysis.
+The wrapper has an optional parameter that outputs a json file with the timestamps of when the conditions were applied. It can be useful in case the time of changing the network impairments is required for further analysis.
 
 ## Further Reading
 
 These were just some basic examples to get started. TC & NetEm allow complex simulations and more information can be found in the documents listed below:
 
-- [Emulating WAN with NETEM II: Packet Loss, Duplication, Reordering, and Corruption](http://ce.sc.edu/cyberinfra/workshops/Material/NTP/Lab%204.pdf) (PDF by Universit of South Carolina)
+- [Emulating WAN with NETEM II: Packet Loss, Duplication, Reordering, and Corruption](http://ce.sc.edu/cyberinfra/workshops/Material/NTP/Lab%204.pdf) (PDF by University of South Carolina)
 
 - [Traffic Control Manual](https://www.cs.unm.edu/~crandall/netsfall13/TCtutorial.pdf) (PDF by University of New Mexico)
 
