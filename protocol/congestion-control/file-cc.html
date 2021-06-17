@@ -6,8 +6,6 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Time-Stamp Based Packet Delivery">
-      
       
       
       
@@ -16,7 +14,7 @@
     
     
       
-        <title>TSBPD - SRT CookBook</title>
+        <title>File Congestion Control - SRT CookBook</title>
       
     
     
@@ -63,7 +61,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tsbpd" class="md-skip">
+        <a href="#file-congestion-control" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +91,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TSBPD
+              File Congestion Control
             
           </span>
         </div>
@@ -556,12 +554,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_6" type="checkbox" id="__nav_6_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_6" type="checkbox" id="__nav_6_6" checked>
       
       <label class="md-nav__link" for="__nav_6_6">
         Congestion control
@@ -579,53 +579,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../congestion-control/index.html" class="md-nav__link">
+      <a href="index.html" class="md-nav__link">
         Congestion Control
       </a>
     </li>
   
 
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../congestion-control/file-cc.html" class="md-nav__link">
-        File Congestion Control
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-            
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_7" type="checkbox" id="__nav_6_7" checked>
-      
-      <label class="md-nav__link" for="__nav_6_7">
-        Tsbpd
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Tsbpd" data-md-level="2">
-        <label class="md-nav__title" for="__nav_6_7">
-          <span class="md-nav__icon md-icon"></span>
-          Tsbpd
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
           
             
   
@@ -641,10 +600,133 @@
         
       
       
-      <a href="index.html" class="md-nav__link md-nav__link--active">
-        TSBPD
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          File Congestion Control
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="file-cc.html" class="md-nav__link md-nav__link--active">
+        File Congestion Control
       </a>
       
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#slow-start" class="md-nav__link">
+    Slow Start
+  </a>
+  
+    <nav class="md-nav" aria-label="Slow Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upon-ack-received" class="md-nav__link">
+    Upon ACK Received
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upon-timers-are-checked" class="md-nav__link">
+    Upon timers are checked
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#congestion-avoidance" class="md-nav__link">
+    Congestion Avoidance
+  </a>
+  
+    <nav class="md-nav" aria-label="Congestion Avoidance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upon-ack" class="md-nav__link">
+    Upon ACK
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upon-loss-report-nack" class="md-nav__link">
+    Upon Loss Report (NACK)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_7" type="checkbox" id="__nav_6_7" >
+      
+      <label class="md-nav__link" for="__nav_6_7">
+        Tsbpd
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tsbpd" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_7">
+          <span class="md-nav__icon md-icon"></span>
+          Tsbpd
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tsbpd/index.html" class="md-nav__link">
+        TSBPD
+      </a>
     </li>
   
 
@@ -654,7 +736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="latency-negotiation.html" class="md-nav__link">
+      <a href="../tsbpd/latency-negotiation.html" class="md-nav__link">
         Latency Negotiation
       </a>
     </li>
@@ -666,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="latency.html" class="md-nav__link">
+      <a href="../tsbpd/latency.html" class="md-nav__link">
         SRT Latency
       </a>
     </li>
@@ -704,6 +786,75 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#slow-start" class="md-nav__link">
+    Slow Start
+  </a>
+  
+    <nav class="md-nav" aria-label="Slow Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upon-ack-received" class="md-nav__link">
+    Upon ACK Received
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upon-timers-are-checked" class="md-nav__link">
+    Upon timers are checked
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#congestion-avoidance" class="md-nav__link">
+    Congestion Avoidance
+  </a>
+  
+    <nav class="md-nav" aria-label="Congestion Avoidance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upon-ack" class="md-nav__link">
+    Upon ACK
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upon-loss-report-nack" class="md-nav__link">
+    Upon Loss Report (NACK)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -714,17 +865,45 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/SRTLab/srt-cookbook/blob/master/docs/protocol/tsbpd/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/SRTLab/srt-cookbook/blob/master/docs/protocol/congestion-control/file-cc.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="tsbpd">TSBPD</h1>
-<p>TSBPD stands for <strong>Time-Stamp Based Packet Delivery</strong>. The mechanism is described in <a href="https://datatracker.ietf.org/doc/html/draft-sharabayko-srt-00#section-4.5">SRT RFC</a>.</p>
-<p>An in-depth overview of the latency in SRT is given in the <a href="./latency">SRT Latency</a>.</p>
-<p>An overview of SRT latency negotiation and the negotiated latency calculator can be found on the <a href="./latency-negotiation">Latency Negotiation</a> page.</p>
-                
-                  
+                <h1 id="file-congestion-control">File Congestion Control</h1>
+<p>The main goal of File congestion control is to send data at the highest possible rate within the given network conditions. Sending with higher rate than the avalable bandwidth of a link will result in  network congestion, forcing huge overhead due to necessity of packet retransmission. Sending with the rate lower, that the available bandwidth, results in underutilization of the network link.</p>
+<p>FileCC has three operation states: slow start, congestion avoidance and slow down.</p>
+<p>At the start, there is no information on the network. Congestion control module has to do some probing to determine the available bandwidth and the best sending pace for the normal operation mode - congestion avoidance.</p>
+<p>In congestion avoidance state, as long as there is no congestion detected (via Loss reports), the sending pace is gradually increased. In case of network congestion, the state is switched to slow down, where the sending pace is reduced to eliminate packet loss in a congested network.</p>
+<h2 id="slow-start">Slow Start</h2>
+<p>Slow-start state has an artificial limit on the number of data packets that can be sent before acknowledgment of those segments is received. Slow-start is designed to limit network congestion [1].</p>
+<p>File CC starts with 16 DATA packets (<code>CWND_SIZE=16</code>) sent with minimum possible interval.</p>
+<pre><code class="language-c++">int m_iRCInterval;          // SRT Rate control interval
+</code></pre>
+<h3 id="upon-ack-received">Upon ACK Received</h3>
+<div class="admonition note">
+<p class="admonition-title">Only Full ACK triggers</p>
+<p>Lite ACK do not trigger this case!</p>
+</div>
+<p>ACK are processed not more often than every 10 milliseconds (<code>CUDT::COMM_SYN_INTERVAL_US</code>).</p>
+<p><code>CWND_SIZE</code> is increased to the difference between the acknowledged sequence number since last ACK processing, and the sequence number being acknowledged:  <code>CWND_SIZE += LAST_ACK_SEQNO - ACK_SEQNO</code>.</p>
+<p>If <code>CWND_SIZE</code> exceeds <code>MAX_CWND_SIZE</code>, slow start period ends. <code>MAX_CWND_SIZE=FLOW_WND_SIZE</code>. If delivery rate was reported by the receiver, the inter sending interval is set according to that rate.</p>
+<pre><code>PKT_SND_PERIOD = 1000000.0 / DELIVERY_RATE
+</code></pre>
+<p>where <code>DELIVERY_RATE</code> is filtered with <code>IIR(8)</code>.</p>
+<p>If delivery rate is not reported, the sending period is set to be</p>
+<pre><code>PktSndPeriod = CWndSize / (RTT + RCInterval)
+</code></pre>
+<h2 id="upon-timers-are-checked">Upon timers are checked</h2>
+<p>Refer to <code>FileCC::speedupToWindowSize(...)</code>.</p>
+<p>When <code>CUDT::checkRexmitTimer(...)</code> is called and there is a timeout for the last response from the receiver, then slow start period ends, and the packet send period is set according to the above rules.</p>
+<h2 id="congestion-avoidance">Congestion Avoidance</h2>
+<h3 id="upon-ack">Upon ACK</h3>
+<h3 id="upon-loss-report-nack">Upon Loss Report (NACK)</h3>
+<h2 id="references">References</h2>
+<ol>
+<li>TCP/IP Characteristics. Windows Dev Center. [<a href="https://docs.microsoft.com/en-us/windows/win32/winsock/tcp-ip-characteristics-2">WEB</a>]</li>
+</ol>
                 
               
               
@@ -744,7 +923,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../congestion-control/file-cc.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: File Congestion Control" rel="prev">
+        <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Congestion Control" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -753,20 +932,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              File Congestion Control
+              Congestion Control
             </div>
           </div>
         </a>
       
       
         
-        <a href="latency-negotiation.html" class="md-footer__link md-footer__link--next" aria-label="Next: Latency Negotiation" rel="next">
+        <a href="../tsbpd/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: TSBPD" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Latency Negotiation
+              TSBPD
             </div>
           </div>
           <div class="md-footer__button md-icon">

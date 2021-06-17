@@ -6,8 +6,6 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Time-Stamp Based Packet Delivery">
-      
       
       
       
@@ -16,7 +14,7 @@
     
     
       
-        <title>TSBPD - SRT CookBook</title>
+        <title>SRT Latency - SRT CookBook</title>
       
     
     
@@ -63,7 +61,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tsbpd" class="md-skip">
+        <a href="#srt-latency" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +91,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TSBPD
+              SRT Latency
             
           </span>
         </div>
@@ -630,21 +628,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
         TSBPD
       </a>
-      
     </li>
   
 
@@ -664,11 +652,106 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="latency.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          SRT Latency
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="latency.html" class="md-nav__link md-nav__link--active">
         SRT Latency
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#packet-delivery-time" class="md-nav__link">
+    Packet Delivery Time
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tsbpd-base-time" class="md-nav__link">
+    TSBPD Base Time
+  </a>
+  
+    <nav class="md-nav" aria-label="TSBPD Base Time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-value" class="md-nav__link">
+    Initial value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tsbpd-wrapping-period" class="md-nav__link">
+    TSBPD Wrapping Period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-drift" class="md-nav__link">
+    Time Drift
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-drift-sample" class="md-nav__link">
+    Time Drift Sample
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drift-tracing-and-adjustment" class="md-nav__link">
+    Drift Tracing and Adjustment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-drifttracer" class="md-nav__link">
+    Class DriftTracer
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -704,6 +787,76 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#packet-delivery-time" class="md-nav__link">
+    Packet Delivery Time
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tsbpd-base-time" class="md-nav__link">
+    TSBPD Base Time
+  </a>
+  
+    <nav class="md-nav" aria-label="TSBPD Base Time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-value" class="md-nav__link">
+    Initial value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tsbpd-wrapping-period" class="md-nav__link">
+    TSBPD Wrapping Period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-drift" class="md-nav__link">
+    Time Drift
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-drift-sample" class="md-nav__link">
+    Time Drift Sample
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drift-tracing-and-adjustment" class="md-nav__link">
+    Drift Tracing and Adjustment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-drifttracer" class="md-nav__link">
+    Class DriftTracer
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -714,17 +867,111 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/SRTLab/srt-cookbook/blob/master/docs/protocol/tsbpd/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/SRTLab/srt-cookbook/blob/master/docs/protocol/tsbpd/latency.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="tsbpd">TSBPD</h1>
-<p>TSBPD stands for <strong>Time-Stamp Based Packet Delivery</strong>. The mechanism is described in <a href="https://datatracker.ietf.org/doc/html/draft-sharabayko-srt-00#section-4.5">SRT RFC</a>.</p>
-<p>An in-depth overview of the latency in SRT is given in the <a href="./latency">SRT Latency</a>.</p>
-<p>An overview of SRT latency negotiation and the negotiated latency calculator can be found on the <a href="./latency-negotiation">Latency Negotiation</a> page.</p>
-                
-                  
+                <h1 id="srt-latency">SRT Latency</h1>
+<p>SRT has an end-to-end latency between the time a packet is given to SRT with <code>srt_sendmsg(...)</code> and the time this very packet is received from SRT via <code>srt_recvmsg(...)</code>.</p>
+<p>The timing diagram illustrates those key latency points with TSBPD enabled (live mode).</p>
+<p><img alt="" src="tsbpd-latency.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">End-to-end latency</p>
+<p>The actual latency on the link will roughly be SRTO_RCVLATENCY + 1/2 × RTT<sub>0</sub>, where RTT<sub>0</sub> is the RTT value during the handshake.</p>
+</div>
+<h2 id="packet-delivery-time">Packet Delivery Time</h2>
+<p>Packet delivery time is the time point, estimated by the receiver, when a packet should be given (delivered) to the upstream application (via <code>srt_recvmsg(...)</code>).
+It consists of the <code>TsbPdTimeBase</code> - the base time difference between sender's and receiver's clock, receiver's buffer delay <code>TsbPdDelay</code>, a timestamp of a data packet <code>PKT_TIMESTAMP</code>,
+and a time drift <code>Drift</code>.</p>
+<p><code>PktTsbPdTime = TsbPdTimeBase + TsbPdDelay + PKT_TIMESTAMP + Drift</code></p>
+<h2 id="tsbpd-base-time">TSBPD Base Time</h2>
+<p><code>TsbPdTimeBase</code> is the base time difference between local clock of the receiver, and the clock used by the sender to timestamp packets being sent. A unit of measurement is microseconds.</p>
+<h3 id="initial-value">Initial value</h3>
+<p>The value of <code>TsbPdTimeBase</code>  is initialized at the time of the conclusion handshake is received as:<br />
+<code>TsbPdTimeBase = T_NOW - HSREQ_TIMESTAMP</code>.<br />
+This value roughly corresponds to the one-way network delay (<strong>~RTT/2</strong>) between the two SRT peers.</p>
+<h3 id="tsbpd-wrapping-period">TSBPD Wrapping Period</h3>
+<p>The value of  <code>TsbPdTimeBase</code>  can be updated during the <strong>TSBPD</strong> wrapping period. The period starts <strong>30 seconds before</strong> reaching the maximum timestamp value of a packet (<code>CPacket::MAX_TIMESTAMP</code>), and ends whens the timestamp of the received packet is within [30; 60] seconds.<br />
+<code>CPacket::MAX_TIMESTAMP = 0xFFFFFFFF</code>, or maximum 32-bit unsigned integer value. The value is in microseconds, which corresponds to 1 hour 11 minutes and 35 seconds (01:11:35).<br />
+In other words, TSBPD time wrapping happens every 01:11:35.</p>
+<p>During the wrapping period, a packet may have a timestamp either in [<code>CPacket::MAX_TIMESTAMP - 30s</code>; <code>CPacket::MAX_TIMESTAMP</code>] or in [0; 30s]. In the first case, the current value of <code>TsbPdTimeBase</code> is used. In the seconds case, <code>TsbPdTimeBase + CPacket::MAX_TIMESTAMP + 1</code> is used to calculate TSBPD time for the packet.</p>
+<p>The wrapping period ends when the timestamp of the received packet is within the interval [30s; 60s]. The updated value will be <code>TsbPdTimeBase += CPacket::MAX_TIMESTAMP + 1</code>.</p>
+<h3 id="time-drift">Time Drift</h3>
+<p>The value of  <code>TsbPdTimeBase</code>  can be updated by the DriftTracer.</p>
+<h2 id="time-drift-sample">Time Drift Sample</h2>
+<p>Upon receipt of an <code>ACKACK</code> packet, the timestamp of this control packet is used as a sample for drift tracing. <code>ACKACK</code> timestamp is expected to be half the round-trip time ago (<strong>RTT/2</strong>). The drift time <strong>DRIFT</strong> is calculated from the current time <strong>T_NOW</strong>; the TSBPD base time <code>TsbPdTimeBase</code>; and the timestamp <strong>ACKACK_TIMESTAMP</strong> of the received <code>ACKACK</code> packet.</p>
+<p><code>DRIFT = T_NOW - (TsbPdTimeBase + ACKACK_TIMESTAMP) - ΔRTT</code>,  </p>
+<p>where <code>ΔRTT = (RTTSample - RTT0) / 2</code> or the difference between the current RTT sample calculated from the ACK-ACKACK pair, and the the first RTT sample <code>RTT0</code>. The motivation for <code>ΔRTT</code> is to compensate a variation in the network delay from the clock drift estimate.</p>
+<div class="admonition note">
+<p class="admonition-title">Handshake-based RTT Needed</p>
+<p>As of SRT v1.4.4 (<a href="https://github.com/Haivision/srt/pull/1965">PR 1965</a>) <code>RTT0</code> is taken from the very first ACK-ACKACK pair.
+Assuming it is the best approximation of the actual <code>RTT0</code> during the handshake. However, the best estimate of the network delay during the handshake would be to estimate RTT based on the exchange of handshakes.</p>
+</div>
+<p>The base time should stay in sync with <code>T_NOW - T_SENDER</code> , and should roughly correspond to the network delay (<strong>~RTT/2</strong>). The value of <code>ACKACK_TIMESTAMP</code> should represent <code>T_SENDER</code>, and be <strong>~RTT/2</strong> in the past.<br />
+Therefore, the above equation can be considered as <br />
+<code>DRIFT = T_NOW - (T_NOW - T_SENDER + T_SENDER) -&gt; 0</code> if the link latency remains constant.</p>
+<p>Assuming that the link latency is constant (RTT=const), the only cause of the drift fluctuations should be clock inaccuracy.</p>
+<div class="admonition note">
+<p class="admonition-title">Drift Tracer should consider RTT</p>
+<p>Time drift sample in SRT versions before v1.4.4 does not take RTT fluctuations into account.
+Instead an increase of RTT will be treated as a time drift. See <a href="https://github.com/Haivision/srt/pull/1965">PR 1965</a>.</p>
+</div>
+<h2 id="drift-tracing-and-adjustment">Drift Tracing and Adjustment</h2>
+<p>Drift tracing is based on accumulating the sum of drift samples.<br />
+<strong>DriftSum</strong> - the sum of the time drift samples on a <strong>MAX_SPAN</strong> number of samples.<br />
+<strong>DriftSpan</strong> is the current number of accumulated samples.<br />
+The default value of <strong>MAX_SPAN</strong> is 1000 samples.<br />
+The default value of <strong>MAX_DRIFT</strong> is 5000 μs (5 ms).<br />
+The default value of <strong>CLEAR_ON_UPDATE</strong> is <strong>true</strong>.</p>
+<p>On each <strong>DriftSpan</strong> sample, the average drift value <strong>Drift</strong> is updated as<br />
+<code>Drift = DriftSum / DriftSpan</code>.<br />
+The values of <strong>DriftSpan</strong> and <strong>DriftSum</strong> are reset to 0.</p>
+<p>If the absolute value of the Drift exceeds <strong>MAX_DRIFT</strong> (<code>|Drift| &gt; MAX_DRIFT</code>), the remainder goes to <strong>OverDrift</strong> value.<br />
+The value of <strong>OverDrift</strong> is used to update the <strong>TsbPdTimeBase</strong>.</p>
+<p>In pseudo-code it looks like this:</p>
+<pre><code class="language-c++">bool update(int64_t driftval)
+{
+    DriftSum += driftval;
+    ++DriftSpan;
+
+    if (m_uDriftSpan &lt; MAX_SPAN)
+        return false;
+
+    if (CLEAR_ON_UPDATE)
+        Overdrift = 0;
+
+    Drift     = DriftSum / DriftSpan;
+    DriftSum  = 0;
+    DriftSpan = 0;
+
+    if (std::abs(Drift) &gt; MAX_DRIFT)
+    {
+        Overdrift = Drift &lt; 0 ? -MAX_DRIFT : MAX_DRIFT;
+        Drift    -= Overdrift;
+    }
+
+    // Drift value was updated
+    return true;
+}
+</code></pre>
+<div class="admonition todo">
+<p class="admonition-title">Consider RTTVar before changin the Drift value</p>
+<p><strong>RTTVar</strong> expresses the variation of RTT values over time. Those variations should be considered when Drift is updated.</p>
+</div>
+<h2 id="class-drifttracer">Class DriftTracer</h2>
+<p>The <strong>DriftTracer</strong> class has the following prototype.</p>
+<pre><code class="language-c++">template&lt;unsigned MAX_SPAN, int MAX_DRIFT, bool CLEAR_ON_UPDATE = true&gt;
+class DriftTracer
+{
+public:
+    DriftTracer();
+public:
+    bool update(int64_t driftval);
+    int64_t drift() const;
+    int64_t overdrift() const;
+};
+</code></pre>
                 
               
               
@@ -744,7 +991,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../congestion-control/file-cc.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: File Congestion Control" rel="prev">
+        <a href="latency-negotiation.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Latency Negotiation" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -753,26 +1000,11 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              File Congestion Control
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="latency-negotiation.html" class="md-footer__link md-footer__link--next" aria-label="Next: Latency Negotiation" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
               Latency Negotiation
             </div>
           </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
         </a>
+      
       
     </nav>
   
