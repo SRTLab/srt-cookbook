@@ -1,4 +1,4 @@
-# SRT Config Calculator
+# SRT Configuration Calculator
 
 <!--Plugin CSS file with desired skin-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
@@ -168,38 +168,46 @@
 <div class="container">
   <div class="row">
     <div class="col-12 mt-3">
-      <label for="kbpsBitrate-slider" class="label-slider h4">Bitrate:</label>
+      <label for="kbpsBitrate-slider" class="label-slider h4">Bitrate</label>
       <input type="text" id="kbpsBitrate-slider" name="kbpsBitrate" oninput="onBitrateChanged(this.value)"/>
     </div>
     <div class="col-12 mt-3">
-      <label for="msRTT-slider" class="label-slider h4">RTT (Round Trip Time):</label>
+      <label for="msRTT-slider" class="label-slider h4">RTT (Round Trip Time)</label>
       <input type="text" id="msRTT-slider" name="msRTT" oninput="onRTTChanged(this.value)"/>
     </div>
-    <div class="col-12 mt-3">
-      <label for="msLatency-slider" class="label-slider h4">Latency:</label>
+    <div class="col-12 col-sm-4 mt-3">
+      <label for="msLatency-slider" class="label-slider h4">Latency</label>
       <input type="text" id="msLatency-slider" name="msLatency" oninput="onLatencyChanged(this.value)"/>
     </div>
+    <div class="col-12 col-sm-4 mt-3">
+      <label for="lossPossible-slider" class="label-slider h4">1 try loss %</label>
+      <input type="text" id="lossPossible-slider" name="lossPossible" oninput="onlossPossibleChanged(this.value)"/>
+    </div>
+    <div class="col-12 col-sm-4 mt-3">
+      <label for="lossAfterRetries-slider" class="label-slider h4">Final loss %</label>
+      <input type="text" id="lossAfterRetries-slider" name="lossAfterRetries" oninput="onLossAfterRetriesChanged(this.value)"/>
+    </div>
     <div class="col-12 mt-3">
-      <label for="byteMSS-slider" class="label-slider h4">MSS (Max Segment Size):</label>
+      <label for="byteMSS-slider" class="label-slider h4">MSS (Max Segment Size)</label>
       <input type="text" id="byteMSS-slider" name="byteMSS" oninput="onMSSChanged(this.value)"/>
     </div>
     <div class="col-12 mt-3">
-      <label for="bytesPayloadSize-slider" class="label-slider h4">Payload Size:</label>
+      <label for="bytesPayloadSize-slider" class="label-slider h4">Payload Size</label>
       <input type="text" id="bytesPayloadSize-slider" name="bytesPayloadSize"
              oninput="onPayloadSizeChanged(this.value)"/>
     </div>
     <div class="col-12 mt-3">
-      <label for="fc-slider" class="label-slider h4">Flow Control window size:</label>
+      <label for="fc-slider" class="label-slider h4">Flow Control window size</label>
       <input type="text" id="fc-slider" name="fc" oninput="onFCChanged(this.value)"/>
     </div>
     <div class="col-12 mt-3">
-      <label for="rcvbuf-slider" class="label-slider h4">Receive Buffer Size:</label>
+      <label for="rcvbuf-slider" class="label-slider h4">Receive Buffer Size</label>
       <input type="text" id="rcvbuf-slider" name="rcvbuf" oninput="onRCVBUFChanged(this.value)"/>
     </div>
     <div class="col-12 col-sm-6 mt-3">
-      <h4>Source IP / Domain & Port:</h4>
+      <h4>Source IP / Domain & Port</h4>
       <label class="p-text col-12 col-sm-8">
-        <input placeholder=" " id="srcInput" name="src" value="0.0.0.0" oninput="onSrcChanged(this.value)">
+        <input placeholder=" " id="srcInput" name="src" value="" oninput="onSrcChanged(this.value)">
         <span>IP / Domain</span>
       </label>
       <label class="p-text col-12 col-sm-3">
@@ -208,7 +216,7 @@
       </label>
     </div>
     <div class="col-12 col-sm-6 mt-3">
-      <h4>Mode:</h4>
+      <h4>Mode</h4>
       <div class="row" id="modeRadiosDiv">
         <div class="radio icheck col-auto">
           <input type="radio" id="listenerInput" value="listener" name="mode" onchange="onListenerClick()"/>
@@ -221,7 +229,7 @@
       </div>
     </div>
     <div class="col-12 mt-3">
-      <h4>Result:</h4>
+      <h4>Result</h4>
       <div class="row">
         <code class="lead text-break" id="configCode"></code>
       </div>
@@ -251,6 +259,8 @@
     radioClass: 'iradio_square-blue',
   });
 
+  let currentTimestamp = () => Math.floor(Date.now() / 1000);
+  var lastChange = currentTimestamp(), lastChangeBy = 'undefined';
   const ACK_BYTES = 44;
   const LISTENER = 'listener',
       CALLER = 'caller';
@@ -258,6 +268,8 @@
       bitrateInput = $('#kbpsBitrate-slider'),
       mssInput = $('#byteMSS-slider'),
       payloadSizeInput = $('#bytesPayloadSize-slider'),
+      lossPossibleInput = $('#lossPossible-slider'),
+      lossAfterRetriesInput = $('#lossAfterRetries-slider'),
       latencyInput = $('#msLatency-slider'),
       fcOutput = $('#fc-slider'),
       rcvbufOutput = $('#rcvbuf-slider'),
@@ -275,7 +287,9 @@
 
     const fullLatencySec = (latency + rtt / 2) / 1000;
     const targetPayloadBytes = Math.floor(fullLatencySec * kbps * 1000 / 8);
-    const targetNumPackets = Math.floor(targetPayloadBytes / payloadSize);
+    let targetNumPackets = Math.floor(targetPayloadBytes / payloadSize);
+    if (targetNumPackets < 32)
+      targetNumPackets = 32;
     const udphdrSize = 28;
     const targetSizeValue = targetNumPackets * (mss - udphdrSize);
 
@@ -304,13 +318,13 @@ receiveBufferSize = targetSizeValue = targetNumPackets * (mss - udphdrSize) = ${
     const src = srcInput.value,
         port = portInput.value;
 
-    let latencyParam = mode === LISTENER ? 'rcvlatency' : 'rcvlatency';
     let srcValue = mode === CALLER ? src : '';
     let srtString = (`\
 srt://${srcValue}:${port}\
 ?mode=${mode}\
 &transtype=live\
-&${latencyParam}=${latency}\
+&rcvlatency=${latency}\
+&peerlatency=${latency}\
 &mss=${mss}\
 &payloadsize=${payloadSize}\
 &fc=${fc}\
@@ -318,32 +332,87 @@ srt://${srcValue}:${port}\
 `);
 
     configCode.innerText = srtString;
-    console.log(srtString);
   };
 
+  function callerName() {
+    return callerName.caller?.name;
+  }
+
   function onRTTChanged(value) {
-    calcParams();
+    $('#lossPossible-slider').change()
+    console.log(callerName()); calcParams();
   }
 
   function onBitrateChanged(value) {
-    calcParams();
+    console.log(callerName()); calcParams();
   }
 
   function onMSSChanged(value) {
-    if (payloadSizeInput.value > Number(value) - ACK_BYTES) {
+    if (payloadSizeInput.val() > Number(value) - ACK_BYTES) {
       payloadSizeInput.data('ionRangeSlider').update({from: Number(value) - ACK_BYTES});
     }
-    calcParams();
+    console.log(callerName()); calcParams();
   }
 
   function onPayloadSizeChanged(value) {
-    if (mssInput.value < Number(value) + ACK_BYTES) {
+    if (mssInput.val() < Number(value) + ACK_BYTES) {
       mssInput.data('ionRangeSlider').update({from: Number(value) + ACK_BYTES});
     }
-    calcParams();
+    console.log(callerName()); calcParams();
+  }
+
+
+  function calcLatencyLosses(rtt, lossPossiblePercent, lossAfterRetriesPercent) {
+    if (lossPossiblePercent !== 0) {
+      let ResendFailProb = lossAfterRetriesPercent / 100
+      let FailProb = lossPossiblePercent / 100
+      let tries = Math.log(ResendFailProb) / Math.log(FailProb)
+      tries = Math.ceil(tries)
+      let latency = rtt * tries
+      // if (Number(latencyInput.val()) < minLatency)
+      latencyInput.data('ionRangeSlider').update({from: latency})
+    }
+  }
+
+  function onlossPossibleChanged(value) {
+    console.log(callerName());
+    if (lastChange !== currentTimestamp() || lastChangeBy === callerName()) {
+      let rtt = Number(rttInput.val()),
+          lossPossiblePercent = Number(value),
+          lossAfterRetriesPercent = Number(lossAfterRetriesInput.val())
+      calcLatencyLosses(rtt, lossPossiblePercent, lossAfterRetriesPercent)
+    }
+    lastChange = currentTimestamp()
+    lastChangeBy = callerName()
+  }
+
+  function onLossAfterRetriesChanged(value) {
+    console.log(callerName());
+    if (lastChange !== currentTimestamp() || lastChangeBy === callerName()) {
+      let rtt = Number(rttInput.val()),
+          lossPossiblePercent = Number(lossPossibleInput.val()),
+          lossAfterRetriesPercent = Number(value)
+      calcLatencyLosses(rtt, lossPossiblePercent, lossAfterRetriesPercent)
+    }
+    lastChange = currentTimestamp()
+    lastChangeBy = callerName()
   }
 
   function onLatencyChanged(value) {
+    console.log(callerName());
+    if (lastChange !== currentTimestamp() || lastChangeBy === callerName()) {
+      let rtt = Number(rttInput.val()),
+          lossPossiblePercent = Number(lossPossibleInput.val()),
+          latency = Number(value)
+      let retries = Math.floor(latency / rtt) // 2
+      let ResendFailProb = retries === 0 ? lossPossiblePercent / 100 : Math.pow(lossPossiblePercent / 100, retries + 1)
+      let lossAfterRetriesPercent = Math.max(ResendFailProb * 100, 0.01)
+      console.log({value, retries, ResendFailProb, lossAfterRetriesPercent})
+      lastChange = currentTimestamp()
+      lastChangeBy = callerName()
+      if (lossAfterRetriesInput.val() != lossAfterRetriesPercent)
+        lossAfterRetriesInput.data('ionRangeSlider').update({from: lossAfterRetriesPercent})
+    }
     calcParams();
   }
 
@@ -377,7 +446,7 @@ srt://${srcValue}:${port}\
     min: 0,
     max: 500,
     step: 5,
-    from: 50,
+    from: 100,
     postfix: ' ms'
   });
   bitrateInput.ionRangeSlider({
@@ -386,7 +455,7 @@ srt://${srcValue}:${port}\
     min: 100,
     max: 20000,
     step: 100,
-    from: 8001,
+    from: 8000,
     postfix: ' kbps'
   });
   mssInput.ionRangeSlider({
@@ -395,7 +464,7 @@ srt://${srcValue}:${port}\
     min: 244,
     max: 1500,
     step: 1,
-    from: 1500,
+    from: 1360,
     postfix: ' bytes'
   });
   payloadSizeInput.ionRangeSlider({
@@ -404,8 +473,26 @@ srt://${srcValue}:${port}\
     min: 200,
     max: 1456,
     step: 1,
-    from: 1456,
+    from: 1316,
     postfix: ' bytes'
+  });
+  lossPossibleInput.ionRangeSlider({
+    skin: 'round',
+    grid: true,
+    min: 0,
+    max: 100,
+    step: 0.1,
+    from: 1,
+    postfix: ' %'
+  });
+  lossAfterRetriesInput.ionRangeSlider({
+    skin: 'round',
+    grid: true,
+    min: 0.01,
+    max: 100,
+    step: 0.01,
+    from: 0.01,
+    postfix: ' %'
   });
   latencyInput.ionRangeSlider({
     skin: 'round',
@@ -434,5 +521,6 @@ srt://${srcValue}:${port}\
     postfix: ' bytes',
     block: false
   });
+  console.log(callerName());
   calcParams();
 </script>
