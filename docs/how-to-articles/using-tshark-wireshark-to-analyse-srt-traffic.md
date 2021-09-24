@@ -1,4 +1,4 @@
-# Using TShark & Wireshark to analyse SRT traffic
+# Using TShark & Wireshark to Analyse SRT Traffic
 
 Wireshark is a free and open-source packet analyzer. It is a very powerful tools to analyse network traffic, such as a connection.
 
