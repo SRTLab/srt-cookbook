@@ -49,8 +49,8 @@ ffplay udp://127.0.0.1:<portB> -f mpegts
 In the latest case the `-f mpegts` argument is optional.
 
 !!! note
-    `-re` [option](https://ffmpeg.org/ffmpeg.html#Advanced-options) will slow down the reading:
-    > Read input at native frame rate. Mainly used to simulate a grab device, or live input stream \(e.g. when reading from a file\). **Should not be used with ... live input streams** \(where it can cause packet loss\). By default ffmpeg attempts to read the input\(s\) as fast as possible. This option will slow down the reading of the input\(s\) to the native frame rate of the input\(s\). It is useful for real-time output \(e.g. live streaming\).
+    `-re` [option](https://ffmpeg.org/ffmpeg.html#Advanced-options) will slow down the reading:  
+    "Read input at native frame rate. Mainly used to simulate a grab device, or live input stream \(e.g. when reading from a file\). **Should not be used with ... live input streams** \(where it can cause packet loss\). By default ffmpeg attempts to read the input\(s\) as fast as possible. This option will slow down the reading of the input\(s\) to the native frame rate of the input\(s\). It is useful for real-time output \(e.g. live streaming\)".
 
 ## Examples
 
