@@ -4,12 +4,12 @@
 
 [FFmpeg supports the SRT protocol](https://www.ffmpeg.org/ffmpeg-protocols.html#srt) out of the box. To include SRT, FFmpeg project should be built with the configure flag `--enable-libsrt`. Refer to [FFmpeg's Compilation Guide](https://trac.ffmpeg.org/wiki/CompilationGuide) for the detailed build instructions for a particular platform.
 
-Please check [Quickstart: Running SRT and FFmpeg on Ubuntu] YouTube Video for additional instructions.
+Please check [Quickstart: Running SRT and FFmpeg on Ubuntu](https://www.youtube.com/watch?v=XOtUOVhussc) YouTube Video for additional instructions.
 
 !!! note
-   There is a [feedback](https://github.com/Haivision/srt/issues/1176)
-   that SRT cannot be built by FFmpeg if both `--enable-libsrt` and
-   `--enable-shared` options are specified.
+    There is a [feedback](https://github.com/Haivision/srt/issues/1176)
+    that SRT cannot be built by FFmpeg if both `--enable-libsrt` and
+    `--enable-shared` options are specified.
 
 A list of available protocols can be determined by calling `ffmpeg -protocols`.  "srt" \(or "libsrt"\) should be listed as both input and output protocol.
 
@@ -49,8 +49,8 @@ ffplay udp://127.0.0.1:<portB> -f mpegts
 In the latest case the `-f mpegts` argument is optional.
 
 !!! note
-   `-re` [option](https://ffmpeg.org/ffmpeg.html#Advanced-options) will slow down the reading:
-   > Read input at native frame rate. Mainly used to simulate a grab device, or live input stream \(e.g. when reading from a file\). **Should not be used with ... live input streams** \(where it can cause packet loss\). By default ffmpeg attempts to read the input\(s\) as fast as possible. This option will slow down the reading of the input\(s\) to the native frame rate of the input\(s\). It is useful for real-time output \(e.g. live streaming\).
+    `-re` [option](https://ffmpeg.org/ffmpeg.html#Advanced-options) will slow down the reading:
+    > Read input at native frame rate. Mainly used to simulate a grab device, or live input stream \(e.g. when reading from a file\). **Should not be used with ... live input streams** \(where it can cause packet loss\). By default ffmpeg attempts to read the input\(s\) as fast as possible. This option will slow down the reading of the input\(s\) to the native frame rate of the input\(s\). It is useful for real-time output \(e.g. live streaming\).
 
 ## Examples
 
