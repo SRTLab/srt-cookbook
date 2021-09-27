@@ -63,28 +63,35 @@ The detailed instructions of running ssh-agent on Mac/Windows/Linux can be found
 
 When adding your SSH key to the agent, use the default macOS `ssh-add` command, and not an application installed by `macports`, `homebrew`, or some other external source.
 
-1. Start the ssh-agent in the background
-   ```
-   $ eval "$(ssh-agent -s)"
-   > Agent pid 59566
-   ```
+#### 1. Start the ssh-agent in the Background
 
-2. If you're using macOS Sierra 10.12.2 or later, you will need to modify your `~/.ssh/config` file to automatically load keys into the ssh-agent and store passphrases in your keychain
-   ```
-   Host *
-     AddKeysToAgent yes
-     UseKeychain yes
-     IdentityFile ~/.ssh/mykey
-   ```
+```shell
+$ eval "$(ssh-agent -s)"
+> Agent pid 59566
+```
 
-3. Add your SSH private key to the ssh-agent and store your passphrase in the keychain
-   ```
-   $ ssh-add -K ~/.ssh/mykey
-   ```
+#### 2. Modify the `~/.ssh/config` File
 
-   **Note:** The `-K` option is Apple's standard version of `ssh-add`, which stores the passphrase in your keychain for you when you add an ssh key to the ssh-agent.
+If you're using macOS Sierra 10.12.2 or later, you will need to modify your `~/.ssh/config` file to automatically load keys into the ssh-agent and store passphrases in your keychain  
 
-   If you don't have Apple's standard version installed, you may receive an error. For more information on resolving this error, see ["Error: ssh-add: illegal option -- K."](https://help.github.com/en/github/authenticating-to-github/error-ssh-add-illegal-option----k)
+```shell
+Host *
+   AddKeysToAgent yes
+   UseKeychain yes
+   IdentityFile ~/.ssh/mykey
+```
+
+#### 3. Store the Passphrase in the Keychain
+
+Add your SSH private key to the ssh-agent and store your passphrase in the keychain
+
+```shell
+$ ssh-add -K ~/.ssh/mykey
+```
+
+**Note:** The `-K` option is Apple's standard version of `ssh-add`, which stores the passphrase in your keychain for you when you add an ssh key to the ssh-agent.
+
+If you don't have Apple's standard version installed, you may receive an error. For more information on resolving this error, see ["Error: ssh-add: illegal option -- K."](https://help.github.com/en/github/authenticating-to-github/error-ssh-add-illegal-option----k)
 
 ### Windows
 
@@ -92,25 +99,28 @@ Please visit the following [GitHub Help page](https://help.github.com/en/github/
 
 ### Linux
 
-1. Start the ssh-agent in the background
-   ```
-   $ eval "$(ssh-agent -s)"
-   > Agent pid 59566
-   ```
+#### 1. Start the ssh-agent in the background
 
-2. Add your SSH private key to the ssh-agent
-   ```
-   $ ssh-add ~/.ssh/mykey
-   ```
+```shell
+$ eval "$(ssh-agent -s)"
+> Agent pid 59566
+```
+
+#### 2. Add your SSH private key to the ssh-agent
+
+```shell
+$ ssh-add ~/.ssh/mykey
+```
 
 ## Automation
 
-1. It is possible to turn off password authentication when SSH to a remote server using one of the following options
-   ```
-   -o PasswordAuth=no
-   -o BatchMode=yes
-   ```
+It is possible to turn off password authentication when SSH to a remote server using one of the following options
 
-  It is recommended to use `-o BatchMode=yes` option to disable any kind of prompt. In this case the script will immediately die if ssh-agent has not been started manually before running the script.
+```shell
+-o PasswordAuth=no
+-o BatchMode=yes
+```
 
-2. In case of running the script within CI (TeamCity, etc.), it is recommended to use public SSH key without passphrase.
+It is recommended to use `-o BatchMode=yes` option to disable any kind of prompt. In this case the script will immediately die if ssh-agent has not been started manually before running the script.
+
+In case of running the script within CI (TeamCity, etc.), it is recommended to use public SSH key without passphrase.
