@@ -4,7 +4,7 @@
 
 [FFmpeg supports the SRT protocol](https://www.ffmpeg.org/ffmpeg-protocols.html#srt) out of the box. To include SRT, FFmpeg project should be built with the configure flag `--enable-libsrt`. Refer to [FFmpeg's Compilation Guide](https://trac.ffmpeg.org/wiki/CompilationGuide) for the detailed build instructions for a particular platform.
 
-Please check [Quickstart: Running SRT and FFmpeg on Ubuntu] YouTube Video for additional instructions.
+Please check [Quickstart: Running SRT and FFmpeg on Ubuntu](https://www.youtube.com/watch?v=XOtUOVhussc) YouTube Video for additional instructions.
 
 !!! note
     There is a [feedback](https://github.com/Haivision/srt/issues/1176)

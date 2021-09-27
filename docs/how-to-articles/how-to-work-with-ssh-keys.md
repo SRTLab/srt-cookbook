@@ -4,7 +4,6 @@ SSH keys can be used to automate access to servers. They are commonly used in sc
 
 For more details, please read the following [article](https://www.ssh.com/ssh).
 
-
 ## Generating SSH Key and Copying It to Remote Server
 
 ### 1. [Check for existing SSH key pair](https://help.github.com/en/github/authenticating-to-github/checking-for-existing-ssh-keys) or generate a new one on your local machine
@@ -52,14 +51,13 @@ ssh -i ~/.ssh/mykey user@host
 
 The login should now complete without asking for a password. Note, however, that the command might ask for the passphrase you've specified for the key.
 
-
 ## Adding the Key to SSH Agent
 
 `ssh-agent` is a program that can hold a user's private key, so that the private key passphrase only needs to be supplied once. A connection to the agent can also be forwarded when logging into a server, allowing [SSH commands](https://www.ssh.com/ssh/command) on the server to use the agent running on the user's desktop. For more information on using and configuring the SSH agent, see the [ssh-agent](https://www.ssh.com/ssh/agent) page.
 
-The detailed instructions of running ssh-agent on Mac/Windows/Linux can be found on the following [GitHub Help page](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+The detailed instructions of running ssh-agent on macOS/Windows/Linux can be found in the following [GitHub Help page](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 
-### Mac
+### macOS
 
 When adding your SSH key to the agent, use the default macOS `ssh-add` command, and not an application installed by `macports`, `homebrew`, or some other external source.
 
