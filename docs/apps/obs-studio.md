@@ -5,8 +5,7 @@
 Starting from version 25.0 OBS Studio supports SRT output.
 
 The usage of SRT protocol with OBS Studio is described in OBS wiki page
-"[Streaming with SRT protocol](https://obsproject.com/wiki/Streaming-With-SRT-Protocol)".
-
+"[Streaming with SRT or RIST protocols](https://obsproject.com/wiki/Streaming-With-SRT-Or-RIST-Protocols)".
 
 ## Notes
 
@@ -14,6 +13,6 @@ The usage of SRT protocol with OBS Studio is described in OBS wiki page
 
 ## Useful Links
 
-- Streaming with SRT protocol: [[web]](https://obsproject.com/wiki/Streaming-With-SRT-Protocol).
+- Streaming with SRT or RIST protocols: [[web]](https://obsproject.com/wiki/Streaming-With-SRT-Or-RIST-Protocols).
 
 - Low-latency and High Performance Streaming: [[web]](https://obsproject.com/forum/resources/low-latency-high-performance-x264-options-for-for-most-streaming-services-youtube-facebook.726/)
