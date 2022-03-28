@@ -4,7 +4,7 @@ description: A free and open source cross-platform multimedia player and framewo
 
 # VLC Media Player
 
-VLC media player supports SRT as an input (starting from VLC version 3 on Mac/Linux, and version 4 on Windows).
+VLC media player supports SRT as an input (starting from VLC version 3).
 _SRT access module source code:_ [_link_](https://fossies.org/linux/vlc/modules/access/srt.c)_._
 
 To open an SRT stream go to the menu "Media" -&gt; "Open Network Stream". Specfy the source URI in the format: `srt://ip:port` .
