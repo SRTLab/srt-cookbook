@@ -6,6 +6,11 @@ edit_uri: blob/master/docs/
 theme:
   name: 'material'
   language: 'en'
+  features:
+    - navigation.tabs
+    - navigation.tracking
+    - toc.integrate
+    - navigation.top
   
 extra:
   search:
