@@ -14,6 +14,9 @@ SRT is used by [thousands of organizations](https://www.srtalliance.org/members/
 * OBS Studio [[Website]](https://obsproject.com/) [[GitHub]](https://github.com/obsproject/obs-studio) [[Configuration Tips]](obs-studio.md)
 * TSDuck [[Website]](https://tsduck.io/) [[GitHub]](https://github.com/tsduck/tsduck) [[Configuration Tips]](tsduck.md)
 
+## Open Source Libraries
+* gosrt [[GitHub]](https://github.com/datarhei/gosrt) Implementation of the SRT protocol in pure Go
+
 ## Free of Charge Players with SRT support
 * VLC Media Player [[Website]](https://www.videolan.org/vlc/index.html) [[Configuration Tips]](https://srtlab.github.io/srt-cookbook/apps/vlc-media-player/)
 * FFPlay [[Website]](http://ffmpeg.org/ffplay.html) [[Configuration Tips (FFMpeg)]](https://srtlab.github.io/srt-cookbook/apps/ffmpeg/)
