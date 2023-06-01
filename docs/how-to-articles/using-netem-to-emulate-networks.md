@@ -58,7 +58,7 @@ sudo tc qdisc add dev enp7s0 root netem delay 250ms
 The following command sets the transmission of enp7s0 network interface to be delayed by 100ms + 10ms (any value between 90 and 110 ms):
 
 ```
-sudp tc qdisc add dev enp7s0 root netem delay 100ms 10ms
+sudo tc qdisc add dev enp7s0 root netem delay 100ms 10ms
 ```
 
 The volatility (randomness) of such fluctuations can be further  specified. The following command sets network interface enp7s0  transmission to 100 ms, while 30% of the packets selected at random are delayed by +10 ms:
